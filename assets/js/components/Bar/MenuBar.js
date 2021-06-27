@@ -17,7 +17,7 @@ class MenuBar extends BaseComponent {
                     <img src="${config.img_dir}icons/home.png" alt="menu-home">
                 </a>
                 <a href="${config.domain}#!/news" class="menu-item btn">
-                    <img src="${config.img_dir}icons/map.png" alt="menu-map">
+                    <img src="${config.img_dir}icons/news.png" alt="menu-news">
                 </a>
                 <a href="${config.domain}#!/monster-book" class="menu-item btn">
                     <img src="${config.img_dir}icons/monster-book.png" alt="menu-monster-book">

@@ -17,6 +17,32 @@ class HomeScreen extends BaseComponent {
                         <div class="screen-desc">
                             <img src="${config.img_dir}screens/home/welcome.png" alt="welcome">
                         </div>
+                        <div class="list-menu">
+                            <a href="${config.domain}#!/map" class="btn menu-item">
+                                <img src="${config.img_dir}screens/home/adventure.png" alt="adventure">
+                            </a>
+                            <a href="${config.domain}#!/pvp" class="btn menu-item">
+                                <img src="${config.img_dir}screens/home/pvp.png" alt="arena">
+                            </a>
+                            <a href="${config.domain}#!/boss" class="btn menu-item">
+                                <img src="${config.img_dir}screens/home/boss.png" alt="boss">
+                            </a>
+                            <a href="${config.domain}#!/dungeo" class="btn menu-item">
+                                <img src="${config.img_dir}screens/home/dungeo.png" alt="dungeo">
+                            </a>
+                            <a href="${config.domain}#!/dungeo" class="btn menu-item">
+                                <img src="${config.img_dir}screens/home/dungeo.png" alt="dungeo">
+                            </a>
+                            <a href="${config.domain}#!/dungeo" class="btn menu-item">
+                                <img src="${config.img_dir}screens/home/dungeo.png" alt="dungeo">
+                            </a>
+                            <a href="${config.domain}#!/dungeo" class="btn menu-item">
+                                <img src="${config.img_dir}screens/home/dungeo.png" alt="dungeo">
+                            </a>
+                            <a href="${config.domain}#!/dungeo" class="btn menu-item">
+                                <img src="${config.img_dir}screens/home/dungeo.png" alt="dungeo">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

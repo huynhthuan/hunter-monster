@@ -9,6 +9,8 @@ import './screens/News/NewsScreen.js';
 import './screens/News/NewsDetailScreen.js';
 import './screens/Chat/ChatScreen.js';
 import './screens/HomeScreen.js';
+import './screens/Map/MapScreen.js';
+import './screens/Map/MapDetailScreen.js';
 
 // Router
 import './router.js';

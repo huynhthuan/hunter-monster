@@ -58,11 +58,18 @@ window.router
         },
         hooks
     )
-    .on('map', function () {
-        console.log('map');
+    .on(
+        'map',
+        function () {
+            appContainer.innerHTML = `<map-screen></map-screen>`;
+        },
+        hooks
+    )
+    .on('map/:id', function ({ params }) {
+        console.log(params.id);
     })
-    .on('map/:mapId', function ({ data }) {
-        console.log(data);
+    .on('map/fight/:id', function ({ params }) {
+        console.log(params.id);
     })
     .on(
         'news',
@@ -89,9 +96,6 @@ window.router
         console.log('monster book');
     })
     .on('monster-book/:monsterId', function ({ data }) {
-        console.log(data);
-    })
-    .on('fight/:map/:monsterId', function ({ data }) {
         console.log(data);
     })
     .on('pvp', function () {
