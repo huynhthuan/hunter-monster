@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Baloo 2', cursive;
+    color: #000000;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    border: none;
+    background: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button img,
+.btn img {
+    transform: scale(1);
+    transition: 0.4s;
+}
+
+button:active img,
+.btn:active img {
+    transform: scale(1.1);
+    transition: 0.4s;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border: none;
+}
+
+button:focus-visible {
+    outline: none !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #000;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.screen-top {
+    position: relative;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.screen-wrapper {
+    padding: 20px;
+}
+
+.screen-wrapper-bar {
+    padding: 100px 20px 90px;
+}
+
+.screen-main {
+    width: 100%;
+    height: 100%;
+}
+
+.screen-content {
+    height: 100%;
+}
+
+.screen-content.content-panel {
+    background: #fcf4ac;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 25px rgba(149, 157, 165, 0.2);
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.screen-title {
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 17px;
+}

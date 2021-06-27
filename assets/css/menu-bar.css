@@ -1,0 +1,19 @@
+.menu-bar {
+    height: 100%;
+    width: 100%;
+    border-top: 5px solid #404042;
+    background-color: #242625;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+}
+
+.menu-item img {
+    width: 100%;
+}

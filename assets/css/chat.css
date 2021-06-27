@@ -1,0 +1,146 @@
+.chat-wrapper {
+    width: 100%;
+    height: 100%;
+    background: url(../img/backgrounds/news/news-bg.jpg);
+    background-size: 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.messenger-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.messenger-ava {
+    position: relative;
+    margin-right: 10px;
+}
+
+.messenger-img {
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.messenger-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.status {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.status.active {
+    background: #7fd220;
+}
+
+.status.inactive {
+    background: #a7b2b6;
+}
+
+.messenger-name {
+    font-weight: bold;
+}
+
+.messenger-content {
+    background: #ffffff;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 25px rgba(149, 157, 165, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    width: fit-content;
+}
+
+.messenger-item {
+    margin-bottom: 14px;
+}
+
+.chat-input {
+    position: relative;
+    overflow: hidden;
+}
+
+#send-chat {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #7fd220;
+    right: 0;
+    top: 0;
+}
+
+#send-chat i {
+    color: white;
+    transform: scale(1);
+    transition: 0.4s;
+    font-size: 20px;
+}
+
+#send-chat:active i {
+    transform: scale(1.5);
+    transition: 0.4s;
+}
+
+.chat-control {
+    border: 2px solid #000000;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+#chat-input {
+    width: 100%;
+    height: 40px;
+    width: 100%;
+    background: #fcf4ac;
+    font-size: 15px;
+    padding: 0 44px 0 15px;
+    border: none;
+    color: black;
+}
+
+#chat-input::placeholder {
+    color: black;
+}
+
+#chat-input:focus {
+    border: none;
+    outline: none;
+}
+
+.chat-list {
+    height: calc(100% - 89px);
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.chat-control-wrap {
+    padding-top: 10px;
+}
+
+.messenger-item-self .messenger-meta {
+    display: none;
+}
+
+.messenger-item-self .messenger-content {
+    margin-left: auto;
+    text-align: right;
+    background: #dccb9d;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunter Monster</title>
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- Menu top -->
+        <div id="app-bar">
+            <user-bar></user-bar>
+        </div>
+
+        <!-- Content -->
+        <div id="app-content"></div>
+
+        <!-- Menu bar -->
+        <div id="app-menu">
+            <menu-bar></menu-bar>
+        </div>
+
+        <!-- Loading screen -->
+        <div id="app-loading">
+            <div class="loading-wrapper">
+                <div class="logo">
+                    <img src="./assets/img/logo/logo.png" alt="logo">
+                </div>
+                <div class="loading-text">
+                    <img src="./assets/img/screens/loading/loading-text.png" alt="loading-text">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/navigo@6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./assets/js/index.js" type="module"></script>
+</body>
+
+</html>
