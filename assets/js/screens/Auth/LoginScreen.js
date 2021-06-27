@@ -1,4 +1,4 @@
-import config from '../../config.js';
+import { config } from '../../config.js';
 
 import { BaseComponent } from '../../components/BaseComponent.js';
 
@@ -49,8 +49,8 @@ class LoginScreen extends BaseComponent {
         `;
 
         // Swal.fire({
-        //     title: 'Error!',
-        //     text: 'Do you want to continue',
+        //     title: 'Có lỗi!',
+        //     text: 'Email không tồn tại, chưa',
         //     confirmButtonText: '',
         //     backdrop: false,
         //     target: document.querySelector('#app'),

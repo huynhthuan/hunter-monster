@@ -8,13 +8,15 @@ let appLoadingScreen = document.querySelector('#app-loading');
 // Hooks
 const hooks = {
     before: function (done, params) {
+        appLoadingScreen.classList.remove('disable');
         setTimeout(function () {
-            appLoadingScreen.classList.remove('disable');
             done();
-        }, 1800);
+        }, 1300);
     },
     after: function (params) {
-        appLoadingScreen.classList.add('disable');
+        setTimeout(function () {
+            appLoadingScreen.classList.add('disable');
+        }, 1000);
     },
     leave: function (params) {
         appLoadingScreen.classList.remove('disable');
