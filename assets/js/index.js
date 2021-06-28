@@ -1,6 +1,7 @@
 // Component
 import './components/Bar/MenuBar.js';
 import './components/Bar/UserBar.js';
+import './components/Monster/monsterBoxPopup.js';
 
 // Screen
 import './screens/Auth/LoginScreen.js';

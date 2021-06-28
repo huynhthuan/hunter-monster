@@ -15,23 +15,22 @@ class MapScreen extends BaseComponent {
             <div class="screen-wrapper map-wrapper screen-wrapper-bar">
                 <div class="screen-main">
                     <div class="screen-content">
-                        
+                        <div class="map-list"></div> 
                     </div>
                 </div>
             </div>
         `;
 
-        console.log(maps);
+        const mapWrapper = this._shadowRoot.querySelector('.map-list');
 
-        // Swal.fire({
-        //     title: 'Error!',
-        //     text: 'Do you want to continue',
-        //     confirmButtonText: '',
-        //     backdrop: false,
-        //     target: document.querySelector('#app'),
-        //     buttonsStyling: false,
-        //     width: '324px',
-        // });
+        maps.forEach((map, index) => {
+            mapWrapper.innerHTML += `
+                <a href="${config.domain}#!/map/${index}" class="map-item btn">
+                    <img class="map-thumbnail" src="${config.img_dir}screens/maps/${map.thumbnail}.png">
+                    <div class="map-title">${map.name}</div>
+                </a>
+            `;
+        });
     }
 }
 

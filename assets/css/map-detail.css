@@ -1,0 +1,105 @@
+.map-detail-wrapper {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.map-description-wrap {
+    height: 140px;
+    background: #fcf4ac;
+    border: 2px solid #000000;
+    box-shadow: 0px 8px 25px rgba(149, 157, 165, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.map-description {
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 18px;
+    color: #000500;
+    height: 100%;
+}
+
+.map-control a {
+    display: block;
+}
+
+.map-control a img {
+    margin: 0 auto;
+}
+
+.monster-item {
+    height: 70px;
+    border-radius: 10px;
+    border: 3px solid #dccb9d;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #e7daa2;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.monster-ava {
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    background: #191627;
+}
+
+.monster-ava img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.monster-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 74px);
+}
+
+.monster-name {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    color: #000;
+}
+
+.monster-level {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.monster-action {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.monster-desc-btn {
+    margin-left: 20px;
+}
+
+.map-monsters-panel {
+    padding: 10px;
+    background: #fcf4ac;
+    border: 2px solid #000000;
+    box-shadow: 0px 8px 25px rgba(149, 157, 165, 0.2);
+    border-radius: 10px;
+    height: calc(100% - 222px);
+}
+
+.map-monsters {
+    height: 100%;
+    overflow-y: auto;
+}

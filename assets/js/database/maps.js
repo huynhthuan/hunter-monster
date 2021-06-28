@@ -1,6 +1,7 @@
 class Map {
-    constructor(name, thumbnail, background, monsters) {
+    constructor(name, description, thumbnail, background, monsters) {
         this._name = name;
+        this._description = description;
         this._thumbnail = thumbnail;
         this._background = background;
         this._monsters = monsters;
@@ -8,6 +9,10 @@ class Map {
 
     get name() {
         return this._name;
+    }
+
+    get description() {
+        return this._description;
     }
 
     get thumbnail() {
@@ -24,6 +29,10 @@ class Map {
 
     set name(value) {
         this._name = value;
+    }
+
+    set description(value) {
+        this._description = value;
     }
 
     set thumbnail(value) {

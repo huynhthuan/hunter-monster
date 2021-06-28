@@ -1,0 +1,57 @@
+.monster-box-info {
+    position: relative;
+}
+
+.monster-box-meta {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.monster-box-name {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    color: #000;
+}
+
+.monster-box-level {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: left;
+}
+
+.monster-box-ava {
+    height: 119px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #000;
+}
+
+.monster-box-ava img {
+    height: 100%;
+    width: auto;
+}
+
+.monster-box-stats {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.monster-stat-item {
+    width: 50%;
+}
+
+.monster-box-stats {
+    border-bottom: 2px solid #000;
+    padding: 15px 0;
+    font-weight: bold;
+    text-align: left;
+}
+
+.monster-box-description {
+    padding: 18px 0 0 0;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: justify;
+}

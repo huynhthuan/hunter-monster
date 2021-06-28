@@ -100,3 +100,7 @@ body.swal2-no-backdrop .swal2-container .swal2-modal {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.swal2-html-container {
+    padding: 10px !important;
+}

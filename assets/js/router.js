@@ -65,10 +65,14 @@ window.router
         },
         hooks
     )
-    .on('map/:id', function ({ params }) {
-        console.log(params.id);
-    })
-    .on('map/fight/:id', function ({ params }) {
+    .on(
+        'map/:id',
+        function (params) {
+            appContainer.innerHTML = `<map-detail-screen map_id="${params.id}"></map-detail-screen>`;
+        },
+        hooks
+    )
+    .on('map/:id/fight/:monster', function (params) {
         console.log(params.id);
     })
     .on(
@@ -81,7 +85,7 @@ window.router
     .on(
         'news/:id',
         function (params) {
-            appContainer.innerHTML = `<news-detail-screen post-id="${params.id}"></news-detail-screen>`;
+            appContainer.innerHTML = `<news-detail-screen id="${params.id}"></news-detail-screen>`;
         },
         hooks
     )

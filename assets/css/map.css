@@ -9,3 +9,30 @@
     flex-direction: column;
     align-items: center;
 }
+
+.map-item {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+.map-title {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(270deg, #000000 20.13%, rgba(0, 0, 0, 0) 90.57%);
+    border-radius: 0px 0px 10px 0px;
+    text-align: center;
+    padding: 10px 20px;
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 600;
+}
+
+.map-list {
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px;
+}

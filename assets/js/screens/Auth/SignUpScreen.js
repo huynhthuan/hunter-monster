@@ -42,8 +42,8 @@ class SignUp extends BaseComponent {
                             <input type="password" id="re-password" class="form-control" placeholder="Nhập lại mật khẩu">
                         </div>
                         <div class="form-group">
-                            <button class="auth-btn autn-btn-login">
-                                <img src="${config.img_dir}screens/auth/btn-login.png" alt="btn-login">
+                            <button class="auth-btn autn-btn-signup">
+                                <img src="${config.img_dir}screens/auth/btn-signup.png" alt="btn-signup">
                             </button>
                         </div>
                      </div>

@@ -14,8 +14,10 @@ class UserBar extends BaseComponent {
             <link rel="stylesheet" href="${config.style_dir}user-bar.css">
             <div class="user-bar">
                 <div class="user-meta">
-                    <div class="user-ava">
-                        <img src="${config.img_dir}users/user-1.png" alt="user-ava">
+                    <div class="user-ava-wrap">
+                        <div class="user-ava">
+                            <img src="${config.img_dir}users/user-1.png" alt="user-ava">
+                        </div>
                     </div>
                     <div class="user-info">
                         <div class="user-name">
