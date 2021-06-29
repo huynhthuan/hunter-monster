@@ -1,0 +1,119 @@
+.monster-book-wrapper {
+    width: 100%;
+    height: 100%;
+    background: url(../img/backgrounds/monster-book/monster-book-bg.jpg);
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.monster-infor-box {
+    text-align: center;
+    position: relative;
+}
+
+.monster-infor-desc-box {
+    background: #fcf4ac;
+    min-width: 145px;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    padding: 10px;
+    margin: 0 auto 12px;
+    display: inline-block;
+}
+
+.monster-name {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    color: #000;
+}
+
+.monster-level {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 13px;
+    color: #000;
+}
+
+.monster-avatar {
+    height: 208px;
+    text-align: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.monster-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.btn-detail-monster {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.monster-book-wrap {
+    height: calc(100% - 287px);
+    background: #fcf4ac;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.monster-book-list {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.monsters-item {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    background: #e7daa2;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    padding: 10px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: calc(50% - 5px);
+}
+
+.monsters-item:hover {
+    cursor: pointer;
+}
+
+.monster-ava {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #fcf4ac;
+}
+
+.monster-ava img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.monster-meta {
+    width: calc(100% - 70px);
+}
+
+.monsters-item .monster-name {
+    font-size: 14px;
+}

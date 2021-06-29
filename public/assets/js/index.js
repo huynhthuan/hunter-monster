@@ -12,6 +12,8 @@ import './screens/Chat/ChatScreen.js';
 import './screens/HomeScreen.js';
 import './screens/Map/MapScreen.js';
 import './screens/Map/MapDetailScreen.js';
+import './screens/MonsterBook/MonsterBookScreen.js';
+import './screens/MonsterBook/MonsterBookDetailScreen.js';
 
 // Router
 import './router.js';

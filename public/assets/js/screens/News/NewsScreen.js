@@ -1,10 +1,14 @@
-import { config } from '../../config.js';
+import { config, FS } from '../../config.js';
 
 import { BaseComponent } from '../../components/BaseComponent.js';
 
 class NewsScreen extends BaseComponent {
     constructor() {
         super();
+        this._firstIndex = 0;
+        this._lastIndex = 0;
+        this._next = true;
+        this._prev = false;
     }
 
     render() {
@@ -16,20 +20,7 @@ class NewsScreen extends BaseComponent {
                 <div class="screen-main">
                     <div class="screen-content content-panel">
                         <div class="screen-title">Tin tức</div>
-                        <div class="post-list">
-                            <div class="post-item">
-                                <a href="${config.domain}#!/news/1" class="post-img">
-                                    <img src="${config.img_dir}news/post-1.png" alt="post-img">
-                                </a>
-                                <div class="post-meta">
-                                    <a href="${config.domain}#!/news/1" class="post-title">
-                                       Dui? Beatae eaque curae quos elit amet? Reiciendis explicabo fugiat quos eget, etiam dicta,
-                                    </a>
-                                    <div class="post-analytics">
-                                        <div class="post-view"><i class="fas fa-eye"></i> 15000</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="post-list" id="news-list">
                         </div>
                         <div class="posts-control">
                             <button id="prev">
@@ -44,15 +35,106 @@ class NewsScreen extends BaseComponent {
             </div>
         `;
 
-        // Swal.fire({
-        //     title: 'Error!',
-        //     text: 'Do you want to continue',
-        //     confirmButtonText: '',
-        //     backdrop: false,
-        //     target: document.querySelector('#app'),
-        //     buttonsStyling: false,
-        //     width: '324px',
-        // });
+        this.firstPage();
+
+        this._shadowRoot.getElementById('prev').onclick = () => {
+            if (this._prev) {
+                this.prevPage();
+            }
+        };
+        this._shadowRoot.getElementById('next').onclick = () => {
+            if (this._next) {
+                this.nextPage();
+            }
+        };
+    }
+
+    async firstPage() {
+        const first = FS.collection('news').orderBy('date').limit(4);
+
+        const snapshot = await first.get();
+        const last = snapshot.docs[snapshot.docs.length - 1];
+        this._lastIndex = last.data().date;
+
+        this._shadowRoot.getElementById('prev').style.filter = 'grayscale(100%)';
+        const check = await FS.collection('news').orderBy('date').startAfter(this._lastIndex).limit(4).get();
+
+        if (check.docs.length == 0) {
+            this._shadowRoot.getElementById('next').style.filter = 'grayscale(100%)';
+            this._next = false;
+        } else {
+            this._shadowRoot.getElementById('next').style.filter = 'none';
+            this._next = true;
+        }
+
+        this.update(snapshot);
+    }
+
+    async nextPage() {
+        const batch = FS.collection('news').orderBy('date').startAfter(this._lastIndex).limit(4);
+
+        const snapshot = await batch.get();
+        this._firstIndex = snapshot.docs[0].data().date;
+        this._lastIndex = snapshot.docs[snapshot.docs.length - 1].data().date;
+        this._prev = true;
+        this._shadowRoot.getElementById('prev').style.filter = 'none';
+
+        const check = await FS.collection('news').orderBy('date').startAfter(this._lastIndex).limit(4).get();
+
+        if (check.docs.length == 0) {
+            this._shadowRoot.getElementById('next').style.filter = 'grayscale(100%)';
+            this._next = false;
+        } else {
+            this._shadowRoot.getElementById('next').style.filter = 'none';
+            this._next = true;
+        }
+
+        this.update(snapshot);
+    }
+
+    async prevPage() {
+        const batch = FS.collection('news').orderBy('date').endBefore(this._firstIndex).limit(4);
+
+        const snapshot = await batch.get();
+        this._firstIndex = snapshot.docs[0].data().date;
+        this._lastIndex = snapshot.docs[snapshot.docs.length - 1].data().date;
+        this._next = true;
+        this._shadowRoot.getElementById('next').style.filter = 'none';
+
+        const check = await FS.collection('news').orderBy('date').endBefore(this._firstIndex).limit(4).get();
+
+        if (check.docs.length == 0) {
+            this._shadowRoot.getElementById('prev').style.filter = 'grayscale(100%)';
+            this._prev = false;
+        } else {
+            this._shadowRoot.getElementById('prev').style.filter = 'none';
+            this._prev = true;
+        }
+
+        this.update(snapshot);
+    }
+
+    update(snapshot) {
+        let result = '';
+        snapshot.docs.forEach((doc) => {
+            let entry = `
+            <div class="post-item">
+                <a href="${config.domain}#!/news/${doc.id}" class="post-img">
+                    <img src="${doc.data().image_feature}" alt="post-img">
+                </a>
+                <div class="post-meta">
+                    <a href="${config.domain}#!/news/${doc.id}" class="post-title">
+                        ${doc.data().title}
+                    </a>
+                    <div class="post-analytics">
+                        <div class="post-view"><i class="fas fa-eye"></i> ${doc.data().views} </div>
+                    </div>
+                </div>
+            </div>`;
+            result += entry;
+
+            this._shadowRoot.getElementById('news-list').innerHTML = result;
+        });
     }
 }
 

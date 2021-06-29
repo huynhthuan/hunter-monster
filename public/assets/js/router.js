@@ -1,9 +1,16 @@
+import { checkLogin } from './ultils/ultils.js';
+
 window.router = new Navigo(null, true, '#!');
 
 let appContainer = document.querySelector('#app-content');
-let appBar = document.querySelector('#app-bar');
-let appMenu = document.querySelector('#app-menu');
 let appLoadingScreen = document.querySelector('#app-loading');
+let appUserBar = document.querySelector('#app-bar');
+let appMenuBar = document.querySelector('#app-menu');
+
+function addBar() {
+    appUserBar.innerHTML = '<user-bar></user-bar>';
+    appMenuBar.innerHTML = '<menu-bar></menu-bar>';
+}
 
 // Hooks
 const hooks = {
@@ -12,6 +19,49 @@ const hooks = {
         setTimeout(function () {
             done();
         }, 1300);
+    },
+    after: function (params) {
+        setTimeout(function () {
+            appLoadingScreen.classList.add('disable');
+        }, 1000);
+    },
+    leave: function (params) {
+        appLoadingScreen.classList.remove('disable');
+    },
+};
+
+const hooksRedirectIfLogin = {
+    before: function (done, params) {
+        appLoadingScreen.classList.remove('disable');
+
+        if (checkLogin()) {
+            router.navigate('/home');
+        } else {
+            setTimeout(function () {
+                done();
+            }, 1300);
+        }
+    },
+    after: function (params) {
+        setTimeout(function () {
+            appLoadingScreen.classList.add('disable');
+        }, 1000);
+    },
+    leave: function (params) {
+        appLoadingScreen.classList.remove('disable');
+    },
+};
+
+const hooksRedirectIfNotLogin = {
+    before: function (done, params) {
+        appLoadingScreen.classList.remove('disable');
+        if (!checkLogin()) {
+            router.navigate('/login');
+        } else {
+            setTimeout(function () {
+                done();
+            }, 1300);
+        }
     },
     after: function (params) {
         setTimeout(function () {
@@ -42,76 +92,117 @@ window.router
         function () {
             appContainer.innerHTML = `<login-screen class="screen-top"></login-screen>`;
         },
-        hooks
+        hooksRedirectIfLogin
     )
     .on(
         'sign-up',
         function () {
             appContainer.innerHTML = `<signup-screen class="screen-top"></signup-screen>`;
         },
-        hooks
+        hooksRedirectIfLogin
     )
     .on(
         'home',
         function () {
+            addBar();
             appContainer.innerHTML = `<home-screen></home-screen>`;
         },
-        hooks
+        hooksRedirectIfNotLogin
     )
     .on(
         'map',
         function () {
+            addBar();
             appContainer.innerHTML = `<map-screen></map-screen>`;
         },
-        hooks
+        hooksRedirectIfNotLogin
     )
     .on(
         'map/:id',
         function (params) {
+            addBar();
             appContainer.innerHTML = `<map-detail-screen map_id="${params.id}"></map-detail-screen>`;
         },
-        hooks
+        hooksRedirectIfNotLogin
     )
-    .on('map/:id/fight/:monster', function (params) {
-        console.log(params.id);
-    })
+    .on(
+        'map/:id/fight/:monster',
+        function (params) {
+            addBar();
+            console.log(params.id);
+        },
+        hooksRedirectIfNotLogin
+    )
     .on(
         'news',
         function () {
+            addBar();
             appContainer.innerHTML = `<news-screen></news-screen>`;
         },
-        hooks
+        hooksRedirectIfNotLogin
     )
     .on(
         'news/:id',
         function (params) {
-            appContainer.innerHTML = `<news-detail-screen id="${params.id}"></news-detail-screen>`;
+            addBar();
+            appContainer.innerHTML = `<news-detail-screen post-id="${params.id}"></news-detail-screen>`;
         },
-        hooks
+        hooksRedirectIfNotLogin
     )
     .on(
         'chat',
         function () {
+            addBar();
             appContainer.innerHTML = `<chat-screen></chat-screen>`;
         },
-        hooks
+        hooksRedirectIfNotLogin
     )
-    .on('monster-book', function () {
-        console.log('monster book');
-    })
-    .on('monster-book/:monsterId', function ({ data }) {
-        console.log(data);
-    })
-    .on('pvp', function () {
-        console.log('pvp');
-    })
-    .on('pvp/rank', function () {
-        console.log('pvp rank');
-    })
-    .on('pvp/:roomId', function ({ data }) {
-        console.log(data);
-    })
-    .on('shop/', function () {
-        console.log('shop');
-    })
+    .on(
+        'monster-book',
+        function () {
+            addBar();
+            appContainer.innerHTML = `<monster-book-screen></monster-book-screen>`;
+        },
+        hooksRedirectIfNotLogin
+    )
+    .on(
+        'monster-book/:id',
+        function (params) {
+            addBar();
+            appContainer.innerHTML = `<monster-book-detail-screen id="${params.id}"></monster-book-detail-screen>`;
+        },
+        hooksRedirectIfNotLogin
+    )
+    .on(
+        'pvp',
+        function () {
+            addBar();
+            console.log('pvp');
+        },
+        hooksRedirectIfNotLogin
+    )
+    .on(
+        'pvp/rank',
+        function () {
+            addBar();
+            console.log('pvp rank');
+        },
+        hooksRedirectIfNotLogin
+    )
+    .on(
+        'pvp/:roomId',
+        function (params) {
+            addBar();
+            console.log(params);
+        },
+        hooksRedirectIfNotLogin
+    )
+    .on(
+        'shop/',
+        function () {
+            addBar();
+            console.log('shop');
+        },
+        hooksRedirectIfNotLogin
+    )
     .resolve();

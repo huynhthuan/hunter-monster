@@ -1,0 +1,82 @@
+.monster-hold-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.btn-back {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.monster-hold-desc {
+    background: #fcf4ac;
+    border: 2px solid #000000;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    height: 66px;
+    padding: 5px;
+    font-size: 16px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.monster-stat {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.stat-item {
+    width: calc(50% - 5px);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.stat-bar {
+    position: relative;
+    width: 100%;
+}
+
+.stat-bar-bg {
+    width: 100%;
+}
+
+.stat-bar-main {
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 10px;
+}
+
+.monster-skill {
+    display: flex;
+    justify-content: space-between;
+}
+
+.skill-item {
+    position: relative;
+}
+
+.skill-lock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.skill-lock.active {
+    opacity: 1;
+    visibility: visible;
+}

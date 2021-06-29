@@ -1,5 +1,5 @@
-import { config } from '../../config.js';
-
+import { config, AU } from '../../config.js';
+import { ShowError, sha1, addTokenLogin } from '../../ultils/ultils.js';
 import { BaseComponent } from '../../components/BaseComponent.js';
 
 class LoginScreen extends BaseComponent {
@@ -36,7 +36,7 @@ class LoginScreen extends BaseComponent {
                             <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu">
                         </div>
                         <div class="form-group">
-                            <button class="auth-btn autn-btn-login">
+                            <button class="auth-btn autn-btn-login" id="btn-login">
                                 <img src="${config.img_dir}screens/auth/btn-login.png" alt="btn-login">
                             </button>
                         </div>
@@ -48,15 +48,40 @@ class LoginScreen extends BaseComponent {
             </div>
         `;
 
-        // Swal.fire({
-        //     title: 'Có lỗi!',
-        //     text: 'Email không tồn tại, chưa',
-        //     confirmButtonText: '',
-        //     backdrop: false,
-        //     target: document.querySelector('#app'),
-        //     buttonsStyling: false,
-        //     width: '324px',
-        // });
+        this.login();
+    }
+
+    login() {
+        let emailInput = this._shadowRoot.getElementById('email');
+        let passwordInput = this._shadowRoot.getElementById('password');
+        this._shadowRoot.getElementById('btn-login').addEventListener('click', async () => {
+            let passwordSHA1 = sha1(passwordInput.value);
+            let flag = 0;
+            if (emailInput.value == '' || passwordInput.value == '') {
+                flag = 1;
+                ShowError('Lỗi rồi!', 'Bạn cần nhập đủ các trường!');
+            } else if (flag == 0) {
+                AU.signInWithEmailAndPassword(emailInput.value, passwordSHA1)
+                    .then((userCredential) => {
+                        addTokenLogin(userCredential.user.refreshToken);
+                        ShowError('Chúc Mừng!', 'Đăng nhập thành công!', '/home');
+                    })
+                    .catch((error) => {
+                        let errorCode = error.code;
+
+                        switch (errorCode) {
+                            case 'auth/wrong-password':
+                                ShowError('Lỗi rồi!', 'Sai mật khẩu, vui lòng đăng nhập lại!');
+                                break;
+                            case 'auth/user-not-found':
+                                ShowError('Lỗi rồi!', 'Người dùng không tồn tại, vui lòng đăng nhập lại!');
+                                break;
+                            default:
+                                ShowError('Lỗi rồi!', 'Vui lòng Kiểm tra lại!');
+                        }
+                    });
+            }
+        });
     }
 }
 

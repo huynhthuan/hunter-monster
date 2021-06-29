@@ -20,6 +20,10 @@
     height: 64px;
 }
 
+.user-ava:hover {
+    cursor: pointer;
+}
+
 .user-ava img {
     width: 100%;
     height: 100%;
@@ -52,7 +56,8 @@
     height: 30px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 4px;
 }
 
 .coin-value {

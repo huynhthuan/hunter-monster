@@ -1,4 +1,5 @@
-import { config } from '../../config.js';
+import { config, AU, FS } from '../../config.js';
+import { verifyPassword, sha1, ShowError } from '../../ultils/ultils.js';
 
 import { BaseComponent } from '../../components/BaseComponent.js';
 
@@ -42,7 +43,7 @@ class SignUp extends BaseComponent {
                             <input type="password" id="re-password" class="form-control" placeholder="Nhập lại mật khẩu">
                         </div>
                         <div class="form-group">
-                            <button class="auth-btn autn-btn-signup">
+                            <button class="auth-btn autn-btn-signup" id="btn-signup">
                                 <img src="${config.img_dir}screens/auth/btn-signup.png" alt="btn-signup">
                             </button>
                         </div>
@@ -54,15 +55,55 @@ class SignUp extends BaseComponent {
             </div>
         `;
 
-        // Swal.fire({
-        //     title: 'Error!',
-        //     text: 'Do you want to continue',
-        //     confirmButtonText: '',
-        //     backdrop: false,
-        //     target: document.querySelector('#app'),
-        //     buttonsStyling: false,
-        //     width: '324px',
-        // });
+        this.SignUp();
+    }
+
+    SignUp() {
+        this._shadowRoot.getElementById('btn-signup').addEventListener('click', async () => {
+            const email = this._shadowRoot.getElementById('email');
+            const password = this._shadowRoot.getElementById('password');
+            const repassword = this._shadowRoot.getElementById('re-password');
+            let passwordSHA1 = sha1(password.value);
+            let flag = 0;
+            if (email.value == '' || password.value == '' || repassword.value == '') {
+                flag = 1;
+                ShowError('Lỗi rồi!', 'Bạn cần nhập đủ các trường!');
+            } else if (!verifyPassword(password.value)) {
+                flag = 1;
+                ShowError('Lỗi rồi!', 'Mật khẩu chỉ bao gồm chữ hoặc số, tối thiểu 8 kí tự chứa ít nhất 1 chữ số, 1 chữ in thường và 1 chữ in hoa!');
+            } else if (repassword.value != password.value) {
+                flag = 1;
+                ShowError('Lỗi rồi!', 'Nhập lại mật khẩu không đúng!');
+                this._shadowRoot.getElementById('re-password').value = '';
+                this._shadowRoot.getElementById('password').value = '';
+            } else if (flag == 0) {
+                AU.createUserWithEmailAndPassword(email.value, passwordSHA1)
+                    .then((userCredential) => {
+                        FS.collection('users').doc(userCredential.user.uid).set({
+                            coin: 100,
+                            star: 0,
+                            monsters: [],
+                            is_newbie: true,
+                        });
+
+                        ShowError('Chúc Mừng!', 'Đăng ký thành công!', '/login');
+                    })
+                    .catch((error) => {
+                        let errorCode = error.code;
+
+                        switch (errorCode) {
+                            case 'auth/email-already-in-use':
+                                ShowError('Lỗi rồi!', 'Email đã tồn tại!');
+                                break;
+                            case 'auth/invalid-email':
+                                ShowError('Lỗi rồi!', 'Email không hợp lệ');
+                                break;
+                            default:
+                                ShowError('Lỗi rồi!', 'Thử lại đi!');
+                        }
+                    });
+            }
+        });
     }
 }
 

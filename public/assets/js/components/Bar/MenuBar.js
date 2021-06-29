@@ -1,4 +1,4 @@
-import { config } from '../../config.js';
+import { AU, config } from '../../config.js';
 
 import { BaseComponent } from '../BaseComponent.js';
 

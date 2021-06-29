@@ -14,17 +14,13 @@
 <body>
     <div id="app">
         <!-- Menu top -->
-        <div id="app-bar">
-            <user-bar></user-bar>
-        </div>
+        <div id="app-bar"></div>
 
         <!-- Content -->
         <div id="app-content"></div>
 
         <!-- Menu bar -->
-        <div id="app-menu">
-            <menu-bar></menu-bar>
-        </div>
+        <div id="app-menu"></div>
 
         <!-- Loading screen -->
         <div id="app-loading">
@@ -39,8 +35,16 @@
         </div>
     </div>
 
+    <!-- Navigo router -->
     <script src="https://unpkg.com/navigo@6"></script>
+
+    <!-- Sweet alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Crypto -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha1.js"></script>
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
@@ -48,6 +52,9 @@
     <!-- FireStore / Authentication -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+
+    <!-- Chance -->
+    <script src="http://chancejs.com/chance.min.js"></script>
 
     <script src="./assets/js/index.js" type="module"></script>
 </body>

@@ -1,4 +1,4 @@
-import { config } from '../config.js';
+import { AU, config } from '../config.js';
 
 import { BaseComponent } from '../components/BaseComponent.js';
 
@@ -47,16 +47,6 @@ class HomeScreen extends BaseComponent {
                 </div>
             </div>
         `;
-
-        // Swal.fire({
-        //     title: 'Error!',
-        //     text: 'Do you want to continue',
-        //     confirmButtonText: '',
-        //     backdrop: false,
-        //     target: document.querySelector('#app'),
-        //     buttonsStyling: false,
-        //     width: '324px',
-        // });
     }
 }
 
