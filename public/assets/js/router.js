@@ -177,7 +177,7 @@ window.router
         'pvp',
         function () {
             addBar();
-            console.log('pvp');
+            appContainer.innerHTML = `<pvp-screen></pvp-screen>`;
         },
         hooksRedirectIfNotLogin
     )
@@ -185,7 +185,7 @@ window.router
         'pvp/rank',
         function () {
             addBar();
-            console.log('pvp rank');
+            appContainer.innerHTML = `<pvp-rank-screen></pvp-rank-screen>`;
         },
         hooksRedirectIfNotLogin
     )

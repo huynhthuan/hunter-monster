@@ -1,0 +1,9 @@
+.pvp-control-rank {
+    justify-content: center;
+}
+
+.rank-number {
+    color: #292923;
+    font-weight: 800;
+    font-size: 36px;
+}

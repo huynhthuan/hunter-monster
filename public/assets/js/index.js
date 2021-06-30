@@ -14,6 +14,8 @@ import './screens/Map/MapScreen.js';
 import './screens/Map/MapDetailScreen.js';
 import './screens/MonsterBook/MonsterBookScreen.js';
 import './screens/MonsterBook/MonsterBookDetailScreen.js';
+import './screens/Pvp/PvpRoomScreen.js';
+import './screens/Pvp/PvpRankScreen.js';
 
 // Router
 import './router.js';

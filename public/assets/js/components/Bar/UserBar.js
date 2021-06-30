@@ -46,7 +46,7 @@ class UserBar extends BaseComponent {
 
         if (userData.star > 0) {
             for (let i = 0; i < userData.star; i++) {
-                userStar_el.innerHTML += `<img src="${config.img_dir}icons/start.png" alt="star">`;
+                userStar_el.innerHTML += `<img src="${config.img_dir}icons/star.png" alt="star">`;
             }
         }
 
