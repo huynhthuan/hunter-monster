@@ -1,0 +1,70 @@
+.shop-wrapper {
+    width: 100%;
+    height: 100%;
+    background: url(../img/backgrounds/news/news-bg.jpg);
+    background-size: 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shop-wrapper .screen-content {
+    justify-content: flex-start;
+}
+
+.item-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(220, 203, 157, 0.44);
+    border-radius: 4px;
+    padding: 4px;
+    margin-bottom: 10px;
+}
+
+.item-ava {
+    background: #4f4428;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+}
+
+.item-meta {
+    width: calc(100% - 160px);
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 4px;
+}
+
+.item-desc {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 14px;
+    margin-bottom: 4px;
+}
+
+.item-price {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.item-price img {
+    margin-right: 4px;
+}
+
+.shop-list {
+    height: 100%;
+    overflow-y: auto;
+}

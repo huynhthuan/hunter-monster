@@ -101,6 +101,32 @@ body.swal2-no-backdrop .swal2-container .swal2-modal {
     background-position: center;
 }
 
+.swal2-confirm.logout {
+    width: 122px;
+    height: 52px;
+    background-image: url(../img/buttons/btn-logout.png);
+}
+
 .swal2-html-container {
     padding: 10px !important;
+}
+
+.swal2-deny {
+    width: 147px;
+    height: 52px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.change-pass {
+    background-image: url(../img/buttons/btn-change-pass.png);
+}
+
+.swal2-actions {
+    justify-content: space-around !important;
+}
+
+.swal2-popup {
+    padding-bottom: 10px !important;
 }

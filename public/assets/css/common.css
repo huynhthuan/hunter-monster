@@ -108,3 +108,20 @@ button:focus-visible {
     text-align: center;
     margin-bottom: 17px;
 }
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.form-group-title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 18px;
+    margin-bottom: 20px;
+}
+
+.form-popup-action {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

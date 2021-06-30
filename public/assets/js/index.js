@@ -1,6 +1,10 @@
 // Component
 import './components/Bar/MenuBar.js';
 import './components/Bar/UserBar.js';
+import './components/UserPopup/UserInfoPopup.js';
+import './components/UserPopup/UserChangePassPopup.js';
+import './components/UserPopup/UserChangeUsernamePopup.js';
+import './components/UserPopup/UserChangeAvaPopup.js';
 import './components/Monster/monsterBoxPopup.js';
 
 // Screen
@@ -16,6 +20,7 @@ import './screens/MonsterBook/MonsterBookScreen.js';
 import './screens/MonsterBook/MonsterBookDetailScreen.js';
 import './screens/Pvp/PvpRoomScreen.js';
 import './screens/Pvp/PvpRankScreen.js';
+import './screens/Shop/ShoopScreen.js';
 
 // Router
 import './router.js';

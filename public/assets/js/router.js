@@ -201,7 +201,7 @@ window.router
         'shop/',
         function () {
             addBar();
-            console.log('shop');
+            appContainer.innerHTML = `<shop-screen></shop-screen>`;
         },
         hooksRedirectIfNotLogin
     )

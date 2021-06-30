@@ -12,7 +12,6 @@ class UserBar extends BaseComponent {
         let userData = userDataResponse.data();
 
         this._shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link rel="stylesheet" href="${config.style_dir}common.css">
             <link rel="stylesheet" href="${config.style_dir}user-bar.css">
             <div class="user-bar">
@@ -27,6 +26,11 @@ class UserBar extends BaseComponent {
                             ${AU.currentUser.displayName} 
                         </div>
                         <div class="user-star">
+                        </div>
+                        <div class="user-setting-bar">
+                            <button id="user-setting">
+                                <img src="${config.img_dir}icons/setting.png" alt="setting">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -43,6 +47,8 @@ class UserBar extends BaseComponent {
 
         const userStar_el = this._shadowRoot.querySelector('.user-star');
         const ava_el = this._shadowRoot.querySelector('#ava-box');
+        const username_el = this._shadowRoot.querySelector('.user-name');
+        const setting_el = this._shadowRoot.querySelector('#user-setting');
 
         if (userData.star > 0) {
             for (let i = 0; i < userData.star; i++) {
@@ -50,23 +56,63 @@ class UserBar extends BaseComponent {
             }
         }
 
-        // AU.onAuthStateChanged((user) => {
-        //     if (user) {
-        //         console.log(user);
-        //     } else {
-        //         console.log('loi');
-        //     }
-        // });
+        setting_el.onclick = () => {
+            Swal.fire({
+                html: `<user-info-popup></user-info-popup>`,
+                confirmButtonText: '',
+                denyButtonText: '',
+                showDenyButton: true,
+                backdrop: false,
+                target: document.querySelector('#app'),
+                buttonsStyling: false,
+                width: '360px',
+                customClass: {
+                    confirmButton: 'logout',
+                    denyButton: 'change-pass',
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    AU.signOut()
+                        .then(() => {
+                            removeTokenLogin();
+                            router.navigate('/login');
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        html: `<user-change-pass-popup></user-change-pass-popup>`,
+                        showConfirmButton: false,
+                        backdrop: false,
+                        target: document.querySelector('#app'),
+                        buttonsStyling: false,
+                        width: '360px',
+                    });
+                }
+            });
+        };
 
         ava_el.onclick = () => {
-            AU.signOut()
-                .then(() => {
-                    removeTokenLogin();
-                    router.navigate('/login');
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            Swal.fire({
+                html: `<user-change-ava-popup></user-change-ava-popup>`,
+                showConfirmButton: false,
+                backdrop: false,
+                target: document.querySelector('#app'),
+                buttonsStyling: false,
+                width: '360px',
+            });
+        };
+
+        username_el.onclick = () => {
+            Swal.fire({
+                html: `<user-change-username-popup></user-change-username-popup>`,
+                showConfirmButton: false,
+                backdrop: false,
+                target: document.querySelector('#app'),
+                buttonsStyling: false,
+                width: '360px',
+            });
         };
     }
 }

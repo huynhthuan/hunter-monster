@@ -1,0 +1,22 @@
+.user-change-username-popup .form-label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 4px;
+    text-align: left;
+}
+
+.user-change-username-popup .form-group {
+    margin-bottom: 10px;
+}
+
+.user-change-username-popup .form-group .form-control {
+    height: 40px;
+    width: 100%;
+    background: #fcf4ac;
+    border: 2px solid #434343;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 0 15px;
+    line-height: 40px;
+}
