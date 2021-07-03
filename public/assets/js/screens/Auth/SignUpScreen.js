@@ -70,7 +70,7 @@ class SignUp extends BaseComponent {
                 ShowNotice('Lỗi rồi!', 'Bạn cần nhập đủ các trường!');
             } else if (!verifyPassword(password.value)) {
                 flag = 1;
-                ShowNotice('Lỗi rồi!', 'Mật khẩu chỉ bao gồm chữ hoặc số, tối thiểu 8 kí tự chứa ít nhất 1 chữ số, 1 chữ in thường và 1 chữ in hoa!');
+                ShowNotice('Lỗi rồi!', 'Mật khẩu gồm 6 ký tự trở lên và viết hoa ít nhất 1 ký tự');
             } else if (repassword.value != password.value) {
                 flag = 1;
                 ShowNotice('Lỗi rồi!', 'Nhập lại mật khẩu không đúng!');
