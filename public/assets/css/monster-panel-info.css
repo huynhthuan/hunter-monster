@@ -1,0 +1,50 @@
+.monster-panel-info {
+    width: 193px;
+    height: 60px;
+    position: relative;
+}
+
+.monster-level {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 13px;
+    text-indent: 4px;
+}
+
+.monster-name {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    color: #ffffff;
+    background: black;
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 6px transparent;
+    text-indent: 4px;
+    margin: 2px 0;
+}
+
+.monster-panel-meta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 4px;
+}
+
+.monster-hp {
+    position: relative;
+    display: flex;
+}
+
+.monster-hp-main {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    height: calc(100% - 2px);
+}

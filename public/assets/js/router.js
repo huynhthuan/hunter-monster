@@ -10,6 +10,13 @@ let appMenuBar = document.querySelector('#app-menu');
 function addBar() {
     appUserBar.innerHTML = '<user-bar></user-bar>';
     appMenuBar.innerHTML = '<menu-bar></menu-bar>';
+    appUserBar.classList.remove('disable');
+    appMenuBar.classList.remove('disable');
+}
+
+function hideBar() {
+    appUserBar.classList.add('disable');
+    appMenuBar.classList.add('disable');
 }
 
 // Hooks
@@ -128,8 +135,8 @@ window.router
     .on(
         'map/:id/fight/:monster',
         function (params) {
-            addBar();
-            console.log(params.id);
+            hideBar();
+            appContainer.innerHTML = `<map-fight-screen map_id="${params.id}" map_monster="${params.monster}"></map-fight-screen>`;
         },
         hooksRedirectIfNotLogin
     )

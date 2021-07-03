@@ -1,5 +1,5 @@
 import { config, AU } from '../../config.js';
-import { ShowError, sha1, addTokenLogin } from '../../ultils/ultils.js';
+import { ShowNotice, sha1, addTokenLogin } from '../../ultils/ultils.js';
 import { BaseComponent } from '../../components/BaseComponent.js';
 
 class LoginScreen extends BaseComponent {
@@ -59,25 +59,25 @@ class LoginScreen extends BaseComponent {
             let flag = 0;
             if (emailInput.value == '' || passwordInput.value == '') {
                 flag = 1;
-                ShowError('Lỗi rồi!', 'Bạn cần nhập đủ các trường!');
+                ShowNotice('Lỗi rồi!', 'Bạn cần nhập đủ các trường!');
             } else if (flag == 0) {
                 AU.signInWithEmailAndPassword(emailInput.value, passwordSHA1)
                     .then((userCredential) => {
                         addTokenLogin(userCredential.user.refreshToken);
-                        ShowError('Chúc Mừng!', 'Đăng nhập thành công!', '/home');
+                        ShowNotice('Chúc Mừng!', 'Đăng nhập thành công!', '/home');
                     })
                     .catch((error) => {
                         let errorCode = error.code;
 
                         switch (errorCode) {
                             case 'auth/wrong-password':
-                                ShowError('Lỗi rồi!', 'Sai mật khẩu, vui lòng đăng nhập lại!');
+                                ShowNotice('Lỗi rồi!', 'Sai mật khẩu, vui lòng đăng nhập lại!');
                                 break;
                             case 'auth/user-not-found':
-                                ShowError('Lỗi rồi!', 'Người dùng không tồn tại, vui lòng đăng nhập lại!');
+                                ShowNotice('Lỗi rồi!', 'Người dùng không tồn tại, vui lòng đăng nhập lại!');
                                 break;
                             default:
-                                ShowError('Lỗi rồi!', 'Vui lòng Kiểm tra lại!');
+                                ShowNotice('Lỗi rồi!', 'Vui lòng Kiểm tra lại!');
                         }
                     });
             }

@@ -1,4 +1,5 @@
 import { config, AU, FS } from '../../config.js';
+import { ShowNotice } from '../../ultils/ultils.js';
 
 import { BaseComponent } from '../BaseComponent.js';
 
@@ -37,6 +38,40 @@ class UserChangeUsernamePopup extends BaseComponent {
         btnClose.onclick = () => {
             Swal.close();
         };
+
+        this.changeUserName();
+    }
+
+    changeUserName() {
+        const user = AU.currentUser;
+        const userNameInput = this._shadowRoot.getElementById('username');
+
+        async function ahihi() {
+            const result = await FS.collection('users').get();
+            result.docs.forEach((doc) => {
+                if (doc.id === user.uid) {
+                    // displayName = userNameInput.value;
+                    FS.collection('users').doc(user.uid).update({
+                        username: userNameInput.value,
+                    });
+                }
+            });
+
+            user.updateProfile({
+                displayName: userNameInput.value,
+            })
+                .then(() => {
+                    ShowNotice('Thành công!', 'Tên nhân vật đã được thay đổi!');
+                })
+                .catch((error) => {
+                    ShowNotice('Lỗi rồi!', error);
+                });
+        }
+
+        // Change info
+        this._shadowRoot.getElementById('save-password').addEventListener('click', function () {
+            ahihi();
+        });
     }
 }
 

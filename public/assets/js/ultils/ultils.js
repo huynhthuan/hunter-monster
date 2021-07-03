@@ -1,8 +1,6 @@
-import { AU } from '../config.js';
-
 // Verify password
 export const verifyPassword = (password) => {
-    const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    const re = /^(?=.*[A-Z]) [a-zA-Z0-9]{6,}$/;
     return re.test(String(password));
 };
 
@@ -12,7 +10,7 @@ export const sha1 = (password) => {
     return CryptoJS.SHA1(password).toString();
 };
 
-export async function ShowError(title, text, urlRedirect) {
+export async function ShowNotice(title, text, urlRedirect) {
     Swal.fire({
         title: title,
         text: text,

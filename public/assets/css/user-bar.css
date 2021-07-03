@@ -36,6 +36,7 @@
     line-height: 20px;
     color: #fff;
     text-shadow: 0 0 4px #000;
+    margin-bottom: 4px;
 }
 
 .user-name:hover {
@@ -45,7 +46,12 @@
 .user-star {
     display: flex;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
+}
+
+.user-setting-bar {
+    display: flex;
+    align-items: center;
 }
 
 .user-star img {
@@ -57,12 +63,11 @@
     border: 2px solid #01556d;
     box-sizing: border-box;
     border-radius: 4px;
-    width: 92px;
     height: 30px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 4px;
+    padding: 0 5px 0 10px;
 }
 
 .coin-value {

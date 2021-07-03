@@ -64,7 +64,7 @@ class MapDetailScreen extends BaseComponent {
                             </div>
                         </div>
                         <div class="monster-action">
-                            <a href="${config.domain}#!/fight/1" class="btn">
+                            <a href="${config.domain}#!/map/${this.props.map_id}/fight/${monsterIndex}" class="btn">
                                 <img src="${config.img_dir}screens/maps/icon-atk.png" alt="icon-atk">
                             </a>
                             <button class="monster-desc-btn" data-id="${monsterIndex}">

@@ -1,0 +1,19 @@
+.monster-enemy,
+.monster-ally {
+    position: relative;
+}
+
+.monster-enemy {
+    bottom: 54%;
+    right: -4%;
+    position: absolute;
+    z-index: 2;
+}
+
+.monster-ally {
+    transform: scaleX(-1);
+    position: absolute;
+    bottom: 14%;
+    left: -4%;
+    z-index: 2;
+}

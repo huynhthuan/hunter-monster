@@ -19,8 +19,9 @@ let firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
+let FB = firebase;
 let FS = firebase.firestore();
 let AU = firebase.auth();
+let STO = firebase.storage();
 
-export { config, FS, AU };
+export { config, FS, AU, FB, STO };

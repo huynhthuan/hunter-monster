@@ -5,7 +5,9 @@ import './components/UserPopup/UserInfoPopup.js';
 import './components/UserPopup/UserChangePassPopup.js';
 import './components/UserPopup/UserChangeUsernamePopup.js';
 import './components/UserPopup/UserChangeAvaPopup.js';
-import './components/Monster/monsterBoxPopup.js';
+import './components/Monster/MonsterPanelInfo.js';
+import './components/Monster/MonsterBoxCharacter.js';
+import './components/Monster/MonsterBoxPopup.js';
 
 // Screen
 import './screens/Auth/LoginScreen.js';
@@ -16,6 +18,8 @@ import './screens/Chat/ChatScreen.js';
 import './screens/HomeScreen.js';
 import './screens/Map/MapScreen.js';
 import './screens/Map/MapDetailScreen.js';
+import './screens/Fight/FightNormalScreen.js';
+import './screens/Fight/FightPvpScreen.js';
 import './screens/MonsterBook/MonsterBookScreen.js';
 import './screens/MonsterBook/MonsterBookDetailScreen.js';
 import './screens/Pvp/PvpRoomScreen.js';

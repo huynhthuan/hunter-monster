@@ -23,7 +23,6 @@ class UserBar extends BaseComponent {
                     </div>
                     <div class="user-info">
                         <div class="user-name">
-                            ${AU.currentUser.displayName} 
                         </div>
                         <div class="user-star">
                         </div>
@@ -46,9 +45,11 @@ class UserBar extends BaseComponent {
         `;
 
         const userStar_el = this._shadowRoot.querySelector('.user-star');
-        const ava_el = this._shadowRoot.querySelector('#ava-box');
+        const ava_wrap_el = this._shadowRoot.querySelector('#ava-box');
         const username_el = this._shadowRoot.querySelector('.user-name');
         const setting_el = this._shadowRoot.querySelector('#user-setting');
+        const coin_el = this._shadowRoot.querySelector('.coin-value');
+        const ava_box = this._shadowRoot.querySelector('.user-ava img');
 
         if (userData.star > 0) {
             for (let i = 0; i < userData.star; i++) {
@@ -93,7 +94,7 @@ class UserBar extends BaseComponent {
             });
         };
 
-        ava_el.onclick = () => {
+        ava_wrap_el.onclick = () => {
             Swal.fire({
                 html: `<user-change-ava-popup></user-change-ava-popup>`,
                 showConfirmButton: false,
@@ -114,6 +115,15 @@ class UserBar extends BaseComponent {
                 width: '360px',
             });
         };
+
+        // Set username
+        FS.collection('users')
+            .doc(AU.currentUser.uid)
+            .onSnapshot((snapshot) => {
+                username_el.innerHTML = snapshot.data().username;
+                coin_el.innerHTML = snapshot.data().coin >= 1000 ? numeral(snapshot.data().coin).format('0.0a') : snapshot.data().coin;
+                ava_box.src = snapshot.data().avatar;
+            });
     }
 }
 

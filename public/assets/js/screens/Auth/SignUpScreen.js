@@ -1,5 +1,5 @@
 import { config, AU, FS } from '../../config.js';
-import { verifyPassword, sha1, ShowError } from '../../ultils/ultils.js';
+import { verifyPassword, sha1, ShowNotice } from '../../ultils/ultils.js';
 
 import { BaseComponent } from '../../components/BaseComponent.js';
 
@@ -67,13 +67,13 @@ class SignUp extends BaseComponent {
             let flag = 0;
             if (email.value == '' || password.value == '' || repassword.value == '') {
                 flag = 1;
-                ShowError('Lỗi rồi!', 'Bạn cần nhập đủ các trường!');
+                ShowNotice('Lỗi rồi!', 'Bạn cần nhập đủ các trường!');
             } else if (!verifyPassword(password.value)) {
                 flag = 1;
-                ShowError('Lỗi rồi!', 'Mật khẩu chỉ bao gồm chữ hoặc số, tối thiểu 8 kí tự chứa ít nhất 1 chữ số, 1 chữ in thường và 1 chữ in hoa!');
+                ShowNotice('Lỗi rồi!', 'Mật khẩu chỉ bao gồm chữ hoặc số, tối thiểu 8 kí tự chứa ít nhất 1 chữ số, 1 chữ in thường và 1 chữ in hoa!');
             } else if (repassword.value != password.value) {
                 flag = 1;
-                ShowError('Lỗi rồi!', 'Nhập lại mật khẩu không đúng!');
+                ShowNotice('Lỗi rồi!', 'Nhập lại mật khẩu không đúng!');
                 this._shadowRoot.getElementById('re-password').value = '';
                 this._shadowRoot.getElementById('password').value = '';
             } else if (flag == 0) {
@@ -84,22 +84,24 @@ class SignUp extends BaseComponent {
                             star: 0,
                             monsters: [],
                             is_newbie: true,
+                            username: 'Unknown name',
+                            avatar: 'https://firebasestorage.googleapis.com/v0/b/huntermonster-2714.appspot.com/o/user-1.png?alt=media&token=e2809bd1-ee2d-4450-afba-734114feb42b',
                         });
 
-                        ShowError('Chúc Mừng!', 'Đăng ký thành công!', '/login');
+                        ShowNotice('Chúc Mừng!', 'Đăng ký thành công!', '/login');
                     })
                     .catch((error) => {
                         let errorCode = error.code;
 
                         switch (errorCode) {
                             case 'auth/email-already-in-use':
-                                ShowError('Lỗi rồi!', 'Email đã tồn tại!');
+                                ShowNotice('Lỗi rồi!', 'Email đã tồn tại!');
                                 break;
                             case 'auth/invalid-email':
-                                ShowError('Lỗi rồi!', 'Email không hợp lệ');
+                                ShowNotice('Lỗi rồi!', 'Email không hợp lệ');
                                 break;
                             default:
-                                ShowError('Lỗi rồi!', 'Thử lại đi!');
+                                ShowNotice('Lỗi rồi!', 'Thử lại đi!');
                         }
                     });
             }
