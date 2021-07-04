@@ -10,30 +10,38 @@ class MonsterPanelInfo extends BaseComponent {
             monster_name: '',
             monster_level: '',
             monster_hp: '',
-            monster_baseHp: '',
+            monster_basehp: '',
             monster_type: '',
         };
     }
 
     static get observedAttributes() {
-        return ['monster_name', 'moster_level', 'monster_hp', 'monster_baseHp', 'monster_type'];
+        return ['monster_name', 'monster_level', 'monster_hp', 'monster_basehp', 'monster_type'];
     }
 
     render() {
+        console.log(this.props.monster_name, Number(this.props.monster_hp), Number(this.props.monster_basehp));
         this._shadowRoot.innerHTML = `
             <link rel="stylesheet" href="${config.style_dir}monster-panel-info.css">
             <div class="monster-panel-info">
-                <img src="${config.img_dir}screens/maps/monste-panel-${this.props.monster_type}.png" alt="monster-panel-bg">
+                <div class="monster-panel-img">
+                    <img src="" alt="monster-panel-bg">
+                </div>
                 <div class="monster-panel-meta">
                     <div class="monster-level">Lv.${this.props.monster_level}</div>
                     <div class="monster-name">${this.props.monster_name}</div>
                     <div class="monster-hp">
                         <img src="${config.img_dir}screens/maps/monster-hp-bg.png" class="monster-hp-bg">
-                        <img src="${config.img_dir}screens/maps/monster-hp-main.png"  style="width: ${(this.props.monster_hp / this.props.monster_baseHp) * 100}%" class="monster-hp-main">
+                        <img src="${config.img_dir}screens/maps/monster-hp-main.png"  style="width: ${
+            (Number(this.props.monster_hp) / Number(this.props.monster_basehp)) * 100
+        }%" class="monster-hp-main">
                     </div>
                 </div>
             </div>
         `;
+        if (this.props.monster_type) {
+            this._shadowRoot.querySelector('.monster-panel-img img').src = `${config.img_dir}screens/maps/monste-panel-${this.props.monster_type}.png`;
+        }
     }
 }
 

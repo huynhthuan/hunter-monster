@@ -50,6 +50,11 @@
 
 .stat-bar {
     position: relative;
+    width: 100%;
+}
+
+.stat-bar-bg {
+    width: 100%;
 }
 
 .stat-bar-main {
@@ -58,9 +63,11 @@
     right: 2px;
     top: 50%;
     transform: translateY(-50%);
-    height: 7px;
+    height: 10px;
     width: 0;
     transition: 0.4s;
+    background-color: #60bd44;
+    border-radius: 2px;
 }
 
 .monster-skill {

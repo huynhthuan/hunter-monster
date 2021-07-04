@@ -4,16 +4,18 @@
 }
 
 .monster-enemy {
-    bottom: 54%;
-    right: -4%;
+    bottom: 50%;
+    left: 320px;
     position: absolute;
     z-index: 2;
+    transform: translateX(-50%);
 }
 
 .monster-ally {
     transform: scaleX(-1);
     position: absolute;
     bottom: 14%;
-    left: -4%;
+    left: 118px;
     z-index: 2;
+    transform: translateX(-50%) scaleX(-1);
 }

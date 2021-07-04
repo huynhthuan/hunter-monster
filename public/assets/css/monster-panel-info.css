@@ -39,6 +39,7 @@
 .monster-hp {
     position: relative;
     display: flex;
+    width: calc(100% - 23px);
 }
 
 .monster-hp-main {

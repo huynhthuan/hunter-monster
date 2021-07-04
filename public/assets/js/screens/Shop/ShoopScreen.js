@@ -94,6 +94,7 @@ class ShopScreen extends BaseComponent {
                                 atk: monsterData.atk,
                                 def: monsterData.def,
                                 hp: monsterData.hp,
+                                baseHp: monsterData.baseHp,
                                 exp: 0,
                                 is_battle: false,
                                 level: 0,

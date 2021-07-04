@@ -56,7 +56,7 @@ class MonsterBookDetailScreen extends BaseComponent {
                                         </div>
                                         <div class="stat-bar">
                                             <img src="${config.img_dir}screens/monster-book/bg-heal.png" class="stat-bar-bg">
-                                            <img src="${config.img_dir}screens/monster-book/bg-heal-main.png" class="stat-bar-main">
+                                            <div class="stat-bar-main"></div>
                                         </div>
                                     </div>
                                     <div class="stat-item stat-def">
@@ -64,8 +64,8 @@ class MonsterBookDetailScreen extends BaseComponent {
                                             PHÒNG THỦ
                                         </div>
                                         <div class="stat-bar">
-                                             <img src="${config.img_dir}screens/monster-book/bg-heal.png" class="stat-bar-bg">
-                                            <img src="${config.img_dir}screens/monster-book/bg-heal-main.png" class="stat-bar-main">
+                                            <img src="${config.img_dir}screens/monster-book/bg-heal.png" class="stat-bar-bg">
+                                            <div class="stat-bar-main"></div>
                                         </div>
                                     </div>
                                     <div class="stat-item stat-hp">
@@ -73,8 +73,8 @@ class MonsterBookDetailScreen extends BaseComponent {
                                             SINH LỰC
                                         </div>
                                         <div class="stat-bar">
-                                             <img src="${config.img_dir}screens/monster-book/bg-heal.png" class="stat-bar-bg">
-                                            <img src="${config.img_dir}screens/monster-book/bg-heal-main.png" class="stat-bar-main">
+                                            <img src="${config.img_dir}screens/monster-book/bg-heal.png" class="stat-bar-bg">
+                                            <div class="stat-bar-main"></div>
                                         </div>
                                     </div>
                                     <div class="stat-item stat-exp">
@@ -83,7 +83,7 @@ class MonsterBookDetailScreen extends BaseComponent {
                                         </div>
                                         <div class="stat-bar">
                                             <img src="${config.img_dir}screens/monster-book/bg-heal.png" class="stat-bar-bg">
-                                            <img src="${config.img_dir}screens/monster-book/bg-heal-main.png" class="stat-bar-main">
+                                            <div class="stat-bar-main"></div>
                                         </div>
                                     </div>
                                 </div>

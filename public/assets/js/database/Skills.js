@@ -44,8 +44,10 @@ class Skill {
         return level >= this._level;
     }
 
-    skillDamage() {
-        return;
+    damageInflicted(monsterAtk, enemyDef) {
+        let minDamage = Math.floor(monsterAtk * (this._skill_dame[0] / 100) * (100 / (100 + enemyDef)));
+        let maxDamage = Math.floor(monsterAtk * (this._skill_dame[1] / 100) * (100 / (100 + enemyDef)));
+        return chance.integer({ min: minDamage, max: maxDamage });
     }
 }
 

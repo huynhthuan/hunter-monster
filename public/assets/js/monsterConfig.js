@@ -14,9 +14,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -29,9 +34,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -44,9 +54,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -59,9 +74,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -74,9 +94,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -89,9 +114,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -104,9 +134,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -119,9 +154,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -134,9 +174,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
     new MonsterMap(
@@ -149,9 +194,14 @@ const monstersMap = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
-        50,
+        10,
         1000
     ),
 ];
@@ -168,10 +218,10 @@ const monstersNormal = [
         115,
         50,
         [
-            new Skill('Absorb', 'Gây ra 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', 60, new EffectCrit('Crit', 20), 0),
-            new Skill('Accelerock', 'Gây ra 40% sát thương đòn đánh', 'skill-2', 60, new EffectCrit('Crit', 20), 10),
-            new Skill('Acid', 'Gây ra 80% sát thương, đòn đánh', 'skill-3', 60, new EffectCrit('Crit', 20), 20),
-            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', 60, new EffectCrit('Crit', 20), 40),
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
         ],
         0,
         false
@@ -186,7 +236,12 @@ const monstersNormal = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
         false
     ),
@@ -200,7 +255,12 @@ const monstersNormal = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
         false
     ),
@@ -215,10 +275,10 @@ const monstersNormal = [
         115,
         50,
         [
-            new Skill('Absorb', 'Gây ra 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', 60, new EffectCrit('Crit', 20), 0),
-            new Skill('Accelerock', 'Gây ra 40% sát thương đòn đánh', 'skill-2', 60, new EffectCrit('Crit', 20), 10),
-            new Skill('Acid', 'Gây ra 80% sát thương, đòn đánh', 'skill-3', 60, new EffectCrit('Crit', 20), 20),
-            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', 60, new EffectCrit('Crit', 20), 40),
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
         ],
         0,
         false
@@ -233,7 +293,12 @@ const monstersNormal = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
         false
     ),
@@ -247,7 +312,12 @@ const monstersNormal = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
         false
     ),
@@ -261,7 +331,12 @@ const monstersNormal = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
         false
     ),
@@ -275,7 +350,12 @@ const monstersNormal = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
         false
     ),
@@ -289,7 +369,12 @@ const monstersNormal = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
         false
     ),
@@ -303,7 +388,12 @@ const monstersNormal = [
         192,
         115,
         50,
-        [],
+        [
+            new Skill('Absorb', 'Gây ra 10% - 20% sát thương, có 20% cơ hội gây chí mạng', 'skill-1', [10, 20], new EffectCrit('Crit', 20), 0),
+            new Skill('Accelerock', 'Gây ra 30% - 50% sát thương đòn đánh', 'skill-2', [30, 50], new EffectCrit('Crit', 20), 10),
+            new Skill('Acid', 'Gây ra 60% - 80% sát thương, đòn đánh', 'skill-3', [60, 80], new EffectCrit('Crit', 20), 20),
+            new Skill('Acid Armor', 'Gây ra 100% sát thương, có 30% cơ hội gây chí mạng', 'skill-4', [100, 100], new EffectCrit('Crit', 20), 40),
+        ],
         0,
         false
     ),
