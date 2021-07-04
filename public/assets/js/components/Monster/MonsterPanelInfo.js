@@ -25,11 +25,11 @@ class MonsterPanelInfo extends BaseComponent {
             <div class="monster-panel-info">
                 <img src="${config.img_dir}screens/maps/monste-panel-${this.props.monster_type}.png" alt="monster-panel-bg">
                 <div class="monster-panel-meta">
-                    <div class="monster-level">Lv.11</div>
-                    <div class="monster-name">VULFROST</div>
+                    <div class="monster-level">Lv.${this.props.monster_level}</div>
+                    <div class="monster-name">${this.props.monster_name}</div>
                     <div class="monster-hp">
                         <img src="${config.img_dir}screens/maps/monster-hp-bg.png" class="monster-hp-bg">
-                        <img src="${config.img_dir}screens/maps/monster-hp-main.png"  style="width: 60%" class="monster-hp-main">
+                        <img src="${config.img_dir}screens/maps/monster-hp-main.png"  style="width: ${(this.props.monster_hp / this.props.monster_baseHp) * 100}%" class="monster-hp-main">
                     </div>
                 </div>
             </div>

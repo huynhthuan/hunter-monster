@@ -25,7 +25,7 @@
 }
 
 .item-ava {
-    background: #4f4428;
+    background: #f1d99c;
     border: 2px solid #000000;
     box-sizing: border-box;
     border-radius: 4px;
@@ -34,6 +34,12 @@
     justify-content: center;
     width: 70px;
     height: 70px;
+}
+
+.item-ava img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }
 
 .item-meta {
@@ -67,4 +73,19 @@
 .shop-list {
     height: 100%;
     overflow-y: auto;
+}
+
+.screen-title {
+    position: relative;
+}
+
+.screen-title img {
+    position: absolute;
+    top: -4px;
+    right: 0;
+    width: 18px;
+}
+
+.screen-title img:hover {
+    cursor: pointer;
 }

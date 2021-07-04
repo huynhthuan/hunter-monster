@@ -23,10 +23,10 @@ class UserChangeAva extends BaseComponent {
                 </div>
                 <div class="form-group form-popup-action mb-0">
                     <button id="btn-close">
-                        <img src="${config.img_dir}buttons/btn-close.png" alt="save-pass">
+                        <img src="${config.img_dir}buttons/btn-close.png" alt="close">
                     </button>
                     <button id="save-ava">
-                        <img src="${config.img_dir}buttons/btn-save.png" alt="save-pass">
+                        <img src="${config.img_dir}buttons/btn-save.png" alt="save">
                     </button>
                 </div>
             </div>

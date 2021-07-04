@@ -1,5 +1,5 @@
 import { config, AU, FS } from '../../config.js';
-import { ShowNotice } from '../../ultils/ultils.js';
+import { ShowNotice, getUid } from '../../ultils/ultils.js';
 
 import { BaseComponent } from '../BaseComponent.js';
 
@@ -9,6 +9,9 @@ class UserChangeUsernamePopup extends BaseComponent {
     }
 
     async render() {
+        let currentUser = await FS.collection('users').doc(getUid()).get();
+        let currentUserData = currentUser.data();
+
         this._shadowRoot.innerHTML = `
             <link rel="stylesheet" href="${config.style_dir}common.css">
             <link rel="stylesheet" href="${config.style_dir}user-change-username-popup.css">
@@ -20,7 +23,7 @@ class UserChangeUsernamePopup extends BaseComponent {
                     <div class="form-label">
                         Tên nhân vật
                     </div>
-                    <input type="text" id="username" class="form-control" placeholder="Nhập tên nhân vật" value="${AU.currentUser.displayName}">
+                    <input type="text" id="username" class="form-control" placeholder="Nhập tên nhân vật" value="${currentUserData.username}">
                 </div>
                 <div class="form-group form-popup-action mb-0">
                     <button id="btn-close">

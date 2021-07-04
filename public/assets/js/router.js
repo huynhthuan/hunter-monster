@@ -80,11 +80,6 @@ const hooksRedirectIfNotLogin = {
     },
 };
 
-// Not found
-window.router.notFound(() => {
-    console.log('not found');
-});
-
 // Loading
 window.router
     .on(
@@ -176,7 +171,7 @@ window.router
         'monster-book/:id',
         function (params) {
             addBar();
-            appContainer.innerHTML = `<monster-book-detail-screen id="${params.id}"></monster-book-detail-screen>`;
+            appContainer.innerHTML = `<monster-book-detail-screen monster_id="${params.id}"></monster-book-detail-screen>`;
         },
         hooksRedirectIfNotLogin
     )
@@ -213,3 +208,12 @@ window.router
         hooksRedirectIfNotLogin
     )
     .resolve();
+
+// Not found
+window.router.notFound(function () {
+    if (!checkLogin()) {
+        router.navigate('/login');
+    } else {
+        router.navigate('/home');
+    }
+}, hooks);

@@ -1,6 +1,6 @@
 // Verify password
 export const verifyPassword = (password) => {
-    const re = /^(?=.*[A-Z]) [a-zA-Z0-9]{6,}$/;
+    const re = /(?=.*[A-Z])[a-zA-Z0-9]{6,}/;
     return re.test(String(password));
 };
 
@@ -13,7 +13,7 @@ export const sha1 = (password) => {
 export async function ShowNotice(title, text, urlRedirect) {
     Swal.fire({
         title: title,
-        text: text,
+        html: text,
         confirmButtonText: '',
         backdrop: false,
         target: document.querySelector('#app'),
@@ -32,10 +32,45 @@ export function checkLogin() {
     return localStorage.getItem('token_login');
 }
 
+export function getUid() {
+    return localStorage.getItem('uid');
+}
+
 export function addTokenLogin(token) {
     localStorage.setItem('token_login', token);
 }
 
+export function addUid(token) {
+    localStorage.setItem('uid', token);
+}
+
 export function removeTokenLogin() {
     localStorage.removeItem('token_login');
+}
+
+export function removeUid() {
+    localStorage.removeItem('uid');
+}
+
+export async function ShowNoticeFight(title, text, urlRedirect) {
+    Swal.fire({
+        title: title,
+        html: text,
+        confirmButtonText: '',
+        backdrop: false,
+        target: document.querySelector('#app'),
+        buttonsStyling: false,
+        width: '324px',
+        customClass: {
+            confirmButton: 'fight-back-map',
+            denyButton: 'change-pass',
+            container: 'fight-notice',
+        },
+    }).then((result) => {
+        if (urlRedirect) {
+            if (result.isConfirmed) {
+                router.navigate(urlRedirect);
+            }
+        }
+    });
 }

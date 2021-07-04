@@ -25,13 +25,23 @@
     padding: 10px;
     margin: 0 auto 12px;
     display: inline-block;
+    position: relative;
+}
+
+.monster-tier {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .monster-name {
     font-weight: bold;
     font-size: 20px;
     line-height: 20px;
-    color: #000;
+    color: #ffffff;
+    background: black;
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 6px transparent;
 }
 
 .monster-level {
@@ -71,11 +81,12 @@
 }
 
 .monster-book-list {
-    height: 100%;
+    max-height: 100%;
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-right: 2px;
 }
 
 .monsters-item {
@@ -96,8 +107,8 @@
 }
 
 .monster-ava {
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 100%;
     border: 1px solid #000000;
     border-radius: 5px;
     overflow: hidden;
@@ -116,4 +127,5 @@
 
 .monsters-item .monster-name {
     font-size: 14px;
+    text-indent: 2px;
 }

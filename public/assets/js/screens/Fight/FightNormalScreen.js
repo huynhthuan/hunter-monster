@@ -1,6 +1,7 @@
 import { config } from '../../config.js';
+import { ShowNoticeFight } from '../../ultils/ultils.js';
 import maps from '../../mapConfig.js';
-import monsters from '../../monsterConfig.js';
+import { monstersMap } from '../../monsterConfig.js';
 
 import { BaseComponent } from '../../components/BaseComponent.js';
 
@@ -20,8 +21,8 @@ class MapFightScreen extends BaseComponent {
 
     async render() {
         let mapData = await maps[this.props.map_id];
-        let enemyData = await monsters[this.props.map_monster];
-        let allyMonster = monsters[0];
+        let enemyData = await monstersMap[this.props.map_monster];
+        let allyMonster = await monstersMap[0];
 
         this._shadowRoot.innerHTML = `
             <link rel="stylesheet" href="${config.style_dir}common.css">
@@ -31,7 +32,8 @@ class MapFightScreen extends BaseComponent {
                     <img src="${config.img_dir}screens/maps/btn-out-fight.png" alt="out-fight">
                 </a>
 
-                <monster-panel-info class="monster-panel moster-panel-enemy" monster_type="fire"></monster-panel-info>
+                <monster-panel-info class="monster-panel moster-panel-enemy" monster_name="${enemyData.name}" monster_hp="${enemyData.hp}" monster_baseHp="${enemyData.baseHp}" monster_level="${enemyData.level}" monster_type="${enemyData.type}"></monster-panel-info>
+
                 <monster-panel-info class="monster-panel moster-panel-self"  monster_type="water"></monster-panel-info>
 
                 <monster-box-character monster_ava="${enemyData.avatar}" monster_type="enemy"></monster-box-character>
@@ -53,6 +55,9 @@ class MapFightScreen extends BaseComponent {
                 </div>
             </div>
         `;
+
+        // ShowNoticeFight('CHIẾN THẮNG', '<div class="fight-notice normal-win"><span>Vàng + 50</span><span>Exp + 100</span></div>', '#!/map/' + this.props.map_id);
+        // ShowNoticeFight('THẤT BẠI', 'Bạn đã thua !', '#!/map/' + this.props.map_id);
     }
 }
 

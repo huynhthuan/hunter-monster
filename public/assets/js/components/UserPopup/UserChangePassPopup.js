@@ -1,5 +1,5 @@
 import { config, AU, FB } from '../../config.js';
-import { sha1, ShowNotice } from '../../ultils/ultils.js';
+import { sha1, ShowNotice, verifyPassword } from '../../ultils/ultils.js';
 
 import { BaseComponent } from '../BaseComponent.js';
 
@@ -63,7 +63,7 @@ class UserChangePassPopup extends BaseComponent {
         const oldPass = this._shadowRoot.getElementById('old-pass');
 
         btnSave.addEventListener('click', function () {
-            if (newPass.value === reNewPass.value) {
+            if (newPass.value != '' && verifyPassword(newPass.value) && newPass.value === reNewPass.value) {
                 const credential = FB.auth.EmailAuthProvider.credential(user.email, sha1(oldPass.value));
                 user.reauthenticateWithCredential(credential)
                     .then(() => {
@@ -80,7 +80,7 @@ class UserChangePassPopup extends BaseComponent {
                         ShowNotice('Lỗi!', error);
                     });
             } else {
-                ShowNotice('Lỗi!', 'Mật khẩu nhập lại không khớp!');
+                ShowNotice('Lỗi!', 'Mật khẩu không đúng định dạng hoặc mật khẩu nhập lại không trùng khớp!');
             }
         });
     }

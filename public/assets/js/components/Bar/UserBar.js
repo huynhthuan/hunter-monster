@@ -1,5 +1,5 @@
 import { AU, FS, config } from '../../config.js';
-import { removeTokenLogin } from '../../ultils/ultils.js';
+import { removeTokenLogin, getUid, removeUid } from '../../ultils/ultils.js';
 import { BaseComponent } from '../BaseComponent.js';
 
 class UserBar extends BaseComponent {
@@ -8,7 +8,7 @@ class UserBar extends BaseComponent {
     }
 
     async render() {
-        let userDataResponse = await FS.collection('users').doc(AU.currentUser.uid).get();
+        let userDataResponse = await FS.collection('users').doc(getUid()).get();
         let userData = userDataResponse.data();
 
         this._shadowRoot.innerHTML = `
@@ -76,6 +76,7 @@ class UserBar extends BaseComponent {
                     AU.signOut()
                         .then(() => {
                             removeTokenLogin();
+                            removeUid();
                             router.navigate('/login');
                         })
                         .catch((error) => {
@@ -116,9 +117,9 @@ class UserBar extends BaseComponent {
             });
         };
 
-        // Set username
+        // Set user data
         FS.collection('users')
-            .doc(AU.currentUser.uid)
+            .doc(getUid())
             .onSnapshot((snapshot) => {
                 username_el.innerHTML = snapshot.data().username;
                 coin_el.innerHTML = snapshot.data().coin >= 1000 ? numeral(snapshot.data().coin).format('0.0a') : snapshot.data().coin;

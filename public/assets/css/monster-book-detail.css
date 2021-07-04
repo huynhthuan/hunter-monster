@@ -11,6 +11,12 @@
     left: 0;
 }
 
+.btn-battle-monster {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .monster-hold-desc {
     background: #fcf4ac;
     border: 2px solid #000000;
@@ -44,19 +50,17 @@
 
 .stat-bar {
     position: relative;
-    width: 100%;
-}
-
-.stat-bar-bg {
-    width: 100%;
 }
 
 .stat-bar-main {
     position: absolute;
     left: 2px;
+    right: 2px;
     top: 50%;
     transform: translateY(-50%);
-    height: 10px;
+    height: 7px;
+    width: 0;
+    transition: 0.4s;
 }
 
 .monster-skill {
@@ -66,6 +70,10 @@
 
 .skill-item {
     position: relative;
+}
+
+.skill-item:hover {
+    cursor: pointer;
 }
 
 .skill-lock {

@@ -73,7 +73,6 @@ class ChatScreen extends BaseComponent {
                                     <div class="messenger-img">
                                         <img src="${userData.avatar}">
                                     </div>
-                                    <div class="status active"></div>
                                 </div>
                                 <div class="messenger-name">
                                     ${userData.username}
@@ -108,7 +107,6 @@ class ChatScreen extends BaseComponent {
                 let size = await FS.collection('chats').get();
                 if (this._limit != size.docs.length) {
                     this._limit = Math.min(this._limit + 10, size.docs.length);
-                    console.log(this._limit);
                     this.loadChat();
                 }
             }

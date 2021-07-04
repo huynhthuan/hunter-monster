@@ -1,6 +1,5 @@
 import { config } from '../../config.js';
-import monsters from '../../monsterConfig.js';
-
+import { monstersMap } from '../../monsterConfig.js';
 import { BaseComponent } from '../BaseComponent.js';
 
 class MonsterBoxPopup extends BaseComponent {
@@ -17,7 +16,7 @@ class MonsterBoxPopup extends BaseComponent {
     }
 
     render() {
-        const monster = monsters[this.props.monster_id];
+        const monster = monstersMap[this.props.monster_id];
         this._shadowRoot.innerHTML = `
             <link rel="stylesheet" href="${config.style_dir}monster-box-popup.css">
             <div class="monster-box-info">
@@ -29,10 +28,11 @@ class MonsterBoxPopup extends BaseComponent {
                     <img src="${config.img_dir}monsters/${monster.avatar}.png" alt="monster-ava">
                 </div>
                 <div class="monster-box-stats">
-                    <div class="monster-stat-item">SỨC MẠNH: ${monster.atk}</div>
-                    <div class="monster-stat-item">PHÒNG THỦ: ${monster.def}</div>
-                    <div class="monster-stat-item">SINH LỰC: ${monster.hp}</div>
-                    <div class="monster-stat-item">KINH NGHIỆM: ${monster.exp_received}</div>
+                    <div class="monster-stat-item"><span class="label">SỨC MẠNH:</span> <span class="value">${monster.atk}</span></div>
+                    <div class="monster-stat-item"><span class="label">PHÒNG THỦ:</span> <span class="value">${monster.def}</span></div>
+                    <div class="monster-stat-item"><span class="label">SINH LỰC:</span> <span class="value">${monster.hp}</span></div>
+                    <div class="monster-stat-item"><span class="label">KINH NGHIỆM NHẬN:</span> <span class="value">+  ${monster.experience_received} Exp</span></div>
+                    <div class="monster-stat-item"><span class="label">VÀNG NHẬN:</span> <span class="value">+  ${monster.gold_received} coin</span></div>
                 </div>
                 <div class="monster-box-description">
                     ${monster.description}

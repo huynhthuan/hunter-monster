@@ -1,15 +1,19 @@
+import Tier from './Tier.js';
+
 class Monster {
-    constructor(name, description, avatar, exp, level, atk, hp, def, exp_received, type) {
+    constructor(name, description, avatar, exp, level, type, atk, hp, def, skills, tier) {
         this._name = name;
         this._description = description;
         this._avatar = avatar;
-        this._level = level;
         this._atk = atk;
         this._hp = hp;
+        this._baseHp = hp;
         this._def = def;
         this._exp = exp;
-        this._exp_received = exp_received;
+        this._level = level;
         this._type = type;
+        this._skills = skills;
+        this._tier = tier;
     }
 
     get name() {
@@ -36,16 +40,24 @@ class Monster {
         return this._hp;
     }
 
+    get baseHp() {
+        return this._baseHp;
+    }
+
     get def() {
         return this._def;
     }
 
-    get exp_received() {
-        return this._exp_received;
-    }
-
     get type() {
         return this._type;
+    }
+
+    get skills() {
+        return this._skills;
+    }
+
+    get tier() {
+        return Tier[this._tier];
     }
 
     set name(value) {
@@ -72,16 +84,40 @@ class Monster {
         this._hp = value;
     }
 
+    set baseHp(value) {
+        this._baseHp = value;
+    }
+
     set def(value) {
         this._def = value;
     }
 
-    set exp_received(value) {
-        this._exp_received = value;
-    }
-
     set type(value) {
         this._type = value;
+    }
+
+    set skills(value) {
+        this._skills = value;
+    }
+
+    set tier(value) {
+        this._tier = value;
+    }
+
+    getExpNextLevel() {
+        return this.getExpOfLevel(this.level + 1);
+    }
+
+    getExpOfLevel(level) {
+        return Math.round(Math.pow(level / 0.3, 2));
+    }
+
+    getMaxLevel() {
+        return Tier[this._tier].maxlevel;
+    }
+
+    getMaxStatValue(stat) {
+        return this.getMaxLevel() * Tier[this._tier].statPerLevel + stat;
     }
 }
 

@@ -1,4 +1,5 @@
 import { config, AU, FS } from '../../config.js';
+import { getUid } from '../../ultils/ultils.js';
 
 import { BaseComponent } from '../BaseComponent.js';
 
@@ -7,9 +8,7 @@ class UserInfoPopup extends BaseComponent {
         super();
     }
 
-    async render() {
-        let userDataResponse = await FS.collection('users').doc(AU.currentUser.uid).get();
-        let userData = userDataResponse.data();
+    render() {
         this._shadowRoot.innerHTML = `
             <link rel="stylesheet" href="${config.style_dir}common.css">
             <link rel="stylesheet" href="${config.style_dir}user-info-popup.css">
@@ -33,7 +32,7 @@ class UserInfoPopup extends BaseComponent {
         const coin_el = this._shadowRoot.querySelector('#coin');
 
         FS.collection('users')
-            .doc(AU.currentUser.uid)
+            .doc(getUid())
             .onSnapshot((snapshot) => {
                 username_el.innerHTML = snapshot.data().username;
                 coin_el.innerHTML = snapshot.data().coin;

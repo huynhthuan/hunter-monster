@@ -1,6 +1,6 @@
 import { config } from '../../config.js';
 import maps from '../../mapConfig.js';
-import monsters from '../../monsterConfig.js';
+import { monstersMap } from '../../monsterConfig.js';
 
 import { BaseComponent } from '../../components/BaseComponent.js';
 
@@ -48,7 +48,7 @@ class MapDetailScreen extends BaseComponent {
 
         const mapMonsterWrapper = this._shadowRoot.querySelector('.map-monsters');
         mapData.monsters.forEach((monsterIndex) => {
-            let monster = monsters[monsterIndex];
+            let monster = monstersMap[monsterIndex];
             mapMonsterWrapper.innerHTML += `
                 <div class="monster-item">
                     <div class="monster-ava">
@@ -67,7 +67,7 @@ class MapDetailScreen extends BaseComponent {
                             <a href="${config.domain}#!/map/${this.props.map_id}/fight/${monsterIndex}" class="btn">
                                 <img src="${config.img_dir}screens/maps/icon-atk.png" alt="icon-atk">
                             </a>
-                            <button class="monster-desc-btn" data-id="${monsterIndex}">
+                            <button class="monster-desc-btn" data-index="${monsterIndex}">
                                 <img src="${config.img_dir}screens/maps/icon-desc.png" alt="icon-desc">
                             </button>
                         </div>
@@ -80,7 +80,7 @@ class MapDetailScreen extends BaseComponent {
         descBtns.forEach((btn) => {
             btn.onclick = () => {
                 Swal.fire({
-                    html: `<monster-box-popup monster_id="${btn.dataset.id}"></monster-box-popup>`,
+                    html: `<monster-box-popup monster_id="${btn.dataset.index}"></monster-box-popup>`,
                     confirmButtonText: '',
                     backdrop: false,
                     target: document.querySelector('#app'),

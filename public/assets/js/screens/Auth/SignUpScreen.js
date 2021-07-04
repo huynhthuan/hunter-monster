@@ -2,6 +2,7 @@ import { config, AU, FS } from '../../config.js';
 import { verifyPassword, sha1, ShowNotice } from '../../ultils/ultils.js';
 
 import { BaseComponent } from '../../components/BaseComponent.js';
+import { monstersNormal } from '../../monsterConfig.js';
 
 class SignUp extends BaseComponent {
     constructor() {
@@ -82,15 +83,30 @@ class SignUp extends BaseComponent {
                         FS.collection('users').doc(userCredential.user.uid).set({
                             coin: 100,
                             star: 0,
-                            monsters: [],
                             is_newbie: true,
                             username: 'Unknown name',
                             avatar: 'https://firebasestorage.googleapis.com/v0/b/huntermonster-2714.appspot.com/o/user-1.png?alt=media&token=e2809bd1-ee2d-4450-afba-734114feb42b',
                         });
 
+                        // Random monster for new user
+
+                        let mosterIndex = chance.integer({ min: 0, max: 2 });
+                        let monsterData = monstersNormal[mosterIndex];
+
+                        FS.collection('monster-templates').doc(userCredential.user.uid).collection('list-monsters').add({
+                            atk: monsterData.atk,
+                            def: monsterData.def,
+                            hp: monsterData.hp,
+                            exp: 0,
+                            is_battle: false,
+                            level: 0,
+                            monster_index: mosterIndex,
+                        });
+
                         ShowNotice('Chúc Mừng!', 'Đăng ký thành công!', '/login');
                     })
                     .catch((error) => {
+                        console.log(error);
                         let errorCode = error.code;
 
                         switch (errorCode) {
@@ -101,6 +117,7 @@ class SignUp extends BaseComponent {
                                 ShowNotice('Lỗi rồi!', 'Email không hợp lệ');
                                 break;
                             default:
+                                console.log(errorCode);
                                 ShowNotice('Lỗi rồi!', 'Thử lại đi!');
                         }
                     });

@@ -1,5 +1,5 @@
 import { config, AU } from '../../config.js';
-import { ShowNotice, sha1, addTokenLogin } from '../../ultils/ultils.js';
+import { ShowNotice, sha1, addTokenLogin, addUid } from '../../ultils/ultils.js';
 import { BaseComponent } from '../../components/BaseComponent.js';
 
 class LoginScreen extends BaseComponent {
@@ -64,6 +64,7 @@ class LoginScreen extends BaseComponent {
                 AU.signInWithEmailAndPassword(emailInput.value, passwordSHA1)
                     .then((userCredential) => {
                         addTokenLogin(userCredential.user.refreshToken);
+                        addUid(userCredential.user.uid);
                         ShowNotice('Chúc Mừng!', 'Đăng nhập thành công!', '/home');
                     })
                     .catch((error) => {
@@ -74,7 +75,7 @@ class LoginScreen extends BaseComponent {
                                 ShowNotice('Lỗi rồi!', 'Sai mật khẩu, vui lòng đăng nhập lại!');
                                 break;
                             case 'auth/user-not-found':
-                                ShowNotice('Lỗi rồi!', 'Người dùng không tồn tại, vui lòng đăng nhập lại!');
+                                ShowNotice('Lỗi rồi!', 'Người dùng không tồn tại, vui lòng kiểm tra lại!');
                                 break;
                             default:
                                 ShowNotice('Lỗi rồi!', 'Vui lòng Kiểm tra lại!');
