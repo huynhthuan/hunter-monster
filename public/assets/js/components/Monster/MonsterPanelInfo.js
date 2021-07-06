@@ -10,17 +10,16 @@ class MonsterPanelInfo extends BaseComponent {
             monster_name: '',
             monster_level: '',
             monster_hp: '',
-            monster_basehp: '',
+            monster_maxhp: '',
             monster_type: '',
         };
     }
 
     static get observedAttributes() {
-        return ['monster_name', 'monster_level', 'monster_hp', 'monster_basehp', 'monster_type'];
+        return ['monster_name', 'monster_level', 'monster_hp', 'monster_maxhp', 'monster_type'];
     }
 
     render() {
-        console.log(this.props.monster_name, Number(this.props.monster_hp), Number(this.props.monster_basehp));
         this._shadowRoot.innerHTML = `
             <link rel="stylesheet" href="${config.style_dir}monster-panel-info.css">
             <div class="monster-panel-info">
@@ -33,7 +32,7 @@ class MonsterPanelInfo extends BaseComponent {
                     <div class="monster-hp">
                         <img src="${config.img_dir}screens/maps/monster-hp-bg.png" class="monster-hp-bg">
                         <img src="${config.img_dir}screens/maps/monster-hp-main.png"  style="width: ${
-            (Number(this.props.monster_hp) / Number(this.props.monster_basehp)) * 100
+            (Number(this.props.monster_hp) / Number(this.props.monster_maxhp)) * 100
         }%" class="monster-hp-main">
                     </div>
                 </div>

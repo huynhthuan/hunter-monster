@@ -1,7 +1,8 @@
-import { config } from '../../config.js';
-import maps from '../../mapConfig.js';
-
 import { BaseComponent } from '../../components/BaseComponent.js';
+
+import { config } from '../../config.js';
+import { Map } from '../../database/Map.js';
+import MapsData from '../../mapConfig.js';
 
 class MapScreen extends BaseComponent {
     constructor() {
@@ -23,11 +24,12 @@ class MapScreen extends BaseComponent {
 
         const mapWrapper = this._shadowRoot.querySelector('.map-list');
 
-        maps.forEach((map, index) => {
+        MapsData.forEach((map, index) => {
+            let mapData = new Map(map.name, map.description, map.thumbnail, map.background, map.monsters);
             mapWrapper.innerHTML += `
                 <a href="${config.domain}#!/map/${index}" class="map-item btn">
-                    <img class="map-thumbnail" src="${config.img_dir}screens/maps/${map.thumbnail}.png">
-                    <div class="map-title">${map.name}</div>
+                    <img class="map-thumbnail" src="${config.img_dir}screens/maps/${mapData.thumbnail}.png">
+                    <div class="map-title">${mapData.name}</div>
                 </a>
             `;
         });

@@ -1,11 +1,11 @@
-import { config, FS } from '../../config.js';
-import { getUid, ShowNotice } from '../../ultils/ultils.js';
 import { BaseComponent } from '../../components/BaseComponent.js';
-import { monstersNormal } from '../../monsterConfig.js';
 
-// import { EffectCrit } from './database/Effects/EffectCrit.js';
-
-// const SkillEffects = [new Effect('Chí mạng', 'Có cơ hội gây ra 200% sát thương của kĩ năng', 10)];
+import { config, FS } from '../../config.js';
+import { getUid, ShowNotice, setMonsterBattle } from '../../ultils/ultils.js';
+import MonstersNormal from '../../monsterNormalConfig.js';
+import { MonsterNormal } from '../../database/Monsters/MonsterNormal.js';
+import SkillsMonster from '../../skillsConfig.js';
+import Skill from '../../database/Skills.js';
 
 class MonsterBookDetailScreen extends BaseComponent {
     constructor() {
@@ -105,7 +105,7 @@ class MonsterBookDetailScreen extends BaseComponent {
         let monsters = await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').where('monster_index', '==', Number(this.props.monster_id)).get();
 
         monsters.forEach((monster) => {
-            let monsterData = monstersNormal[this.props.monster_id];
+            let monsterData = MonstersNormal[this.props.monster_id];
             monsterData.atk = monster.data().atk;
             monsterData.def = monster.data().def;
             monsterData.hp = monster.data().hp;
@@ -113,27 +113,45 @@ class MonsterBookDetailScreen extends BaseComponent {
             monsterData.level = monster.data().level;
             monsterData.is_battle = monster.data().is_battle;
 
-            detail_el.querySelector('.monster-name').innerHTML = monsterData.name;
-            detail_el.querySelector('.monster-level').innerHTML = `Lv.${monsterData.level}`;
-            detail_el.querySelector('.monster-tier').src = `${config.img_dir}tiers/${monsterData.tier.image}.png`;
-            detail_el.querySelector('.monster-avatar img').src = `${config.img_dir}monsters/${monsterData.avatar}.png`;
+            let monsterDetailData = new MonsterNormal(
+                monsterData.name,
+                monsterData.description,
+                monsterData.image,
+                monsterData.exp,
+                monsterData.level,
+                monsterData.type,
+                monsterData.atk,
+                monsterData.hp,
+                monsterData.def,
+                monsterData.skills,
+                monsterData.tier,
+                monsterData.is_battle
+            );
 
-            info_el.querySelector('.monster-hold-desc').innerText = monsterData.description;
-            info_el.querySelector('.stat-atk .stat-bar-main').style.width = (monsterData.atk / monsterData.getMaxStatValue(monsterData.atk)) * 100 + '%';
-            info_el.querySelector('.stat-hp .stat-bar-main').style.width = (monsterData.hp / monsterData.getMaxStatValue(monsterData.hp)) * 100 + '%';
-            info_el.querySelector('.stat-def .stat-bar-main').style.width = (monsterData.def / monsterData.getMaxStatValue(monsterData.def)) * 100 + '%';
-            info_el.querySelector('.stat-exp .stat-bar-main').style.width = (monsterData.exp / monsterData.getExpOfLevel(monsterData.level + 1)) * 100 + '%';
+            detail_el.querySelector('.monster-name').innerHTML = monsterDetailData.name;
+            detail_el.querySelector('.monster-level').innerHTML = `Lv.${monsterDetailData.level}`;
+            detail_el.querySelector('.monster-tier').src = `${config.img_dir}tiers/${monsterDetailData.tier.image}.png`;
+            detail_el.querySelector('.monster-avatar img').src = `${config.img_dir}monsters/${monsterDetailData.image}.png`;
 
-            monsterData.skills.forEach((skill, index) => {
+            info_el.querySelector('.monster-hold-desc').innerText = monsterDetailData.description;
+            info_el.querySelector('.stat-atk .stat-bar-main').style.width = (monsterDetailData.atk / monsterDetailData.getMaxStatValue(monsterDetailData.atk)) * 100 + '%';
+            info_el.querySelector('.stat-hp .stat-bar-main').style.width = (monsterDetailData.hp / monsterDetailData.getMaxStatValue(monsterDetailData.hp)) * 100 + '%';
+            info_el.querySelector('.stat-def .stat-bar-main').style.width = (monsterDetailData.def / monsterDetailData.getMaxStatValue(monsterDetailData.def)) * 100 + '%';
+            info_el.querySelector('.stat-exp .stat-bar-main').style.width = (monsterDetailData.exp / monsterDetailData.getExpOfLevel(monsterDetailData.level + 1)) * 100 + '%';
+
+            monsterDetailData.skills.forEach((skill, index) => {
+                let skillData = SkillsMonster[skill];
+                let skillObj = new Skill(skillData.name, skillData.description, skillData.image, skillData.skill_damage, skillData.skill_effect, skillData.level_required);
+
                 skill_el.insertAdjacentHTML(
                     'beforeend',
                     `
                     <div class="skill-item" id="skill-${index}">
-                        <img src="${config.img_dir}skills/${skill.image}.png" class="skill-img">
+                        <img src="${config.img_dir}skills/${skillObj.image}.png" class="skill-img">
                         ${
                             index > 0
-                                ? `<img src="${config.img_dir}screens/monster-book/lock-skill-${skill.level_required}.png" class="skill-lock ${
-                                      skill.checkLevelRequired(monsterData.level) ? '' : 'active'
+                                ? `<img src="${config.img_dir}screens/monster-book/lock-skill-${skillObj.level_required}.png" class="skill-lock ${
+                                      skillObj.checkLevelRequired(monsterData.level) ? '' : 'active'
                                   }">`
                                 : ''
                         }
@@ -143,7 +161,7 @@ class MonsterBookDetailScreen extends BaseComponent {
                 );
 
                 skill_el.querySelector('#skill-' + index).onclick = () => {
-                    ShowNotice(skill.name, skill.description);
+                    ShowNotice(skillObj.name, skillObj.description);
                 };
             });
         });
@@ -160,17 +178,6 @@ class MonsterBookDetailScreen extends BaseComponent {
         const btnChangeStateMonster = detail_el.querySelector('.btn-battle-monster');
 
         btnChangeStateMonster.onclick = async () => {
-            //Update all monster to false in battle
-            let responseAll = await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').where('monster_index', '!=', Number(this.props.monster_id)).get();
-
-            responseAll.forEach(async (response) => {
-                if (response.data().is_battle) {
-                    await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').doc(response.id).update({
-                        is_battle: false,
-                    });
-                }
-            });
-
             //Update monster
             let responses = await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').where('monster_index', '==', Number(this.props.monster_id)).get();
 
@@ -183,6 +190,15 @@ class MonsterBookDetailScreen extends BaseComponent {
                         is_battle: response.data().is_battle ? false : true,
                     });
             });
+
+            //Check monster battle
+            let responseAll = await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').get();
+            let countMonsterBatle = 0;
+            responseAll.forEach(async (response) => {
+                response.data().is_battle ? countMonsterBatle++ : '';
+            });
+
+            setMonsterBattle(countMonsterBatle);
         };
     }
 }

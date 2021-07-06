@@ -35,7 +35,7 @@ class UserInfoPopup extends BaseComponent {
             .doc(getUid())
             .onSnapshot((snapshot) => {
                 username_el.innerHTML = snapshot.data().username;
-                coin_el.innerHTML = snapshot.data().coin;
+                coin_el.innerHTML = snapshot.data().coin >= 1000 ? numeral(snapshot.data().coin).format('0.0a') : snapshot.data().coin;
             });
     }
 }

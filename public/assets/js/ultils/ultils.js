@@ -44,6 +44,18 @@ export function addUid(token) {
     localStorage.setItem('uid', token);
 }
 
+export function setMonsterBattle(count) {
+    localStorage.setItem('monsterBattle', count);
+}
+
+export function getMonsterBattle() {
+    return localStorage.getItem('monsterBattle');
+}
+
+export function removeMonsterBattle() {
+    localStorage.removeItem('monsterBattle');
+}
+
 export function removeTokenLogin() {
     localStorage.removeItem('token_login');
 }

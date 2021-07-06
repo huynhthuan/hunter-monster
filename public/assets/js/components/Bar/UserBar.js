@@ -1,5 +1,5 @@
 import { AU, FS, config } from '../../config.js';
-import { removeTokenLogin, getUid, removeUid } from '../../ultils/ultils.js';
+import { removeTokenLogin, getUid, removeUid, removeMonsterBattle } from '../../ultils/ultils.js';
 import { BaseComponent } from '../BaseComponent.js';
 
 class UserBar extends BaseComponent {
@@ -77,6 +77,7 @@ class UserBar extends BaseComponent {
                         .then(() => {
                             removeTokenLogin();
                             removeUid();
+                            removeMonsterBattle();
                             router.navigate('/login');
                         })
                         .catch((error) => {

@@ -1,7 +1,8 @@
-import { AU, config, FS } from '../../config.js';
-import { monstersNormal } from '../../monsterConfig.js';
-import { getUid } from '../../ultils/ultils.js';
 import { BaseComponent } from '../../components/BaseComponent.js';
+import { config, FS } from '../../config.js';
+import { getUid } from '../../ultils/ultils.js';
+import MonstersNormal from '../../monsterNormalConfig.js';
+import Tier from '../../database/Tier.js';
 
 class MonsterBookScreen extends BaseComponent {
     constructor() {
@@ -46,7 +47,7 @@ class MonsterBookScreen extends BaseComponent {
     async renderYourMonster(container_el, detail_el) {
         let listMonsters = await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').get();
         listMonsters.forEach((monster) => {
-            let monsterData = monstersNormal[monster.data().monster_index];
+            let monsterData = MonstersNormal[monster.data().monster_index];
             monsterData.atk = monster.data().atk;
             monsterData.def = monster.data().def;
             monsterData.hp = monster.data().hp;
@@ -59,7 +60,7 @@ class MonsterBookScreen extends BaseComponent {
                 `
                 <div class="monsters-item" id="monster-${monster.id}">
                     <div class="monster-ava">
-                        <img src="${config.img_dir}monsters/${monsterData.avatar}.png" alt="monster">
+                        <img src="${config.img_dir}monsters/${monsterData.image}.png" alt="monster">
                     </div>
                     <div class="monster-meta">
                         <div class="monster-name">${monsterData.name}</div>
@@ -72,7 +73,7 @@ class MonsterBookScreen extends BaseComponent {
             let monsterItem_el = container_el.querySelector('#monster-' + monster.id);
 
             monsterItem_el.onclick = () => {
-                this.renderDetailMonster(monsterData.name, monsterData.level, monsterData.avatar, monster.data().monster_index, monsterData.tier.image, detail_el);
+                this.renderDetailMonster(monsterData.name, monsterData.level, monsterData.image, monster.data().monster_index, Tier[monsterData.tier].image, detail_el);
             };
         });
 

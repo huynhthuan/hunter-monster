@@ -1,8 +1,14 @@
-import { config, FS } from '../../config.js';
-import maps from '../../mapConfig.js';
-import { monstersMap, monstersNormal } from '../../monsterConfig.js';
 import { BaseComponent } from '../../components/BaseComponent.js';
+import { config, FS } from '../../config.js';
 import { getUid, ShowNoticeFight } from '../../ultils/ultils.js';
+
+import MapsData from '../../mapConfig.js';
+
+import MonstersNormal from '../../monsterNormalConfig.js';
+import { MonsterNormal } from '../../database/Monsters/MonsterNormal.js';
+
+import MonstersMap from '../../monsterMapConfig.js';
+import { MonsterMap } from '../../database/Monsters/MonsterMap.js';
 
 class MapFightScreen extends BaseComponent {
     constructor() {
@@ -20,27 +26,50 @@ class MapFightScreen extends BaseComponent {
     }
 
     async render() {
-        let mapData = maps[this.props.map_id];
+        // Get data map
+        let mapData = MapsData[this.props.map_id];
+        let userMonster, enemyMonster, monsterNormalTemplate, monsterEnemyTemplate, userMonsterId;
 
-        // Getuser data
-        let userData = await FS.collection('users').doc(getUid()).get();
-        // Set up data monster
-        let monsterAllyData, monsterEnemyData, monsterAllyId;
-        monsterEnemyData = monstersMap[this.props.map_monster];
-        let monsterAllyHpBase;
+        // Get monster user
+        let userMonstersResponses = await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').where('is_battle', '==', true).get();
 
-        let allyMonsters = await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').where('is_battle', '==', true).limit(1).get();
-        allyMonsters.forEach((allyMonster) => {
-            monsterAllyData = monstersNormal[allyMonster.data().monster_index];
-            monsterAllyData.atk = allyMonster.data().atk;
-            monsterAllyData.def = allyMonster.data().def;
-            monsterAllyData.hp = allyMonster.data().hp;
-            monsterAllyData.baseHp = allyMonster.data().baseHp;
-            monsterAllyData.exp = allyMonster.data().exp;
-            monsterAllyData.level = allyMonster.data().level;
-            monsterAllyId = allyMonster.id;
-            monsterAllyHpBase = allyMonster.data().hp;
+        userMonstersResponses.forEach((userMonstersResponse) => {
+            userMonsterId = userMonstersResponse.id;
+            monsterNormalTemplate = MonstersNormal[userMonstersResponse.data().monster_index];
+            // Set data to user monster
+            userMonster = new MonsterNormal(
+                monsterNormalTemplate.name,
+                monsterNormalTemplate.description,
+                monsterNormalTemplate.image,
+                userMonstersResponse.data().exp,
+                userMonstersResponse.data().level,
+                monsterNormalTemplate.type,
+                userMonstersResponse.data().atk,
+                userMonstersResponse.data().hp,
+                userMonstersResponse.data().def,
+                monsterNormalTemplate.skills,
+                monsterNormalTemplate.tier
+            );
         });
+
+        // Get monster enemy
+        monsterEnemyTemplate = MonstersMap[this.props.map_monster];
+        // Set monster enemy
+        enemyMonster = new MonsterMap(
+            monsterEnemyTemplate.name,
+            monsterEnemyTemplate.description,
+            monsterEnemyTemplate.image,
+            monsterEnemyTemplate.exp,
+            monsterEnemyTemplate.level,
+            monsterNormalTemplate.type,
+            monsterEnemyTemplate.atk,
+            monsterEnemyTemplate.hp,
+            monsterEnemyTemplate.def,
+            monsterEnemyTemplate.skills,
+            monsterEnemyTemplate.tier,
+            monsterEnemyTemplate.exp_received,
+            monsterEnemyTemplate.gold_received
+        );
 
         this._shadowRoot.innerHTML = `
             <link rel="stylesheet" href="${config.style_dir}common.css">
@@ -48,117 +77,151 @@ class MapFightScreen extends BaseComponent {
             <div class="screen-wrapper map-fight-wrapper " style="background-image: url(${config.img_dir}backgrounds/maps/${mapData.background}.png)">
                 <a href="${config.domain}#!/map/${this.props.map_id}" class="btn-out-fight btn">
                     <img src="${config.img_dir}screens/maps/btn-out-fight.png" alt="out-fight">
-                </a>    
-                <monster-panel-info class="monster-panel moster-panel-enemy" monster_name="${monsterEnemyData.name}" monster_hp="${monsterEnemyData.hp}" monster_basehp="${monsterEnemyData.baseHp}" monster_level="${monsterEnemyData.level}" monster_type="${monsterEnemyData.type}"></monster-panel-info>
-                <monster-panel-info class="monster-panel moster-panel-self" monster_name="${monsterAllyData.name}" monster_hp="${monsterAllyData.hp}" monster_basehp="${monsterAllyData.baseHp}" monster_level="${monsterAllyData.level}" monster_type="${monsterAllyData.type}"></monster-panel-info>
-                <monster-box-character monster_ava="${monsterEnemyData.avatar}" monster_type="enemy"></monster-box-character>
-                <monster-box-character monster_ava="${monsterAllyData.avatar}" monster_type="ally"></monster-box-character>
+                </a>
+
+                <monster-panel-info class="monster-panel moster-panel-enemy" monster_name="${enemyMonster.name}" monster_hp="${enemyMonster.hp}" monster_maxhp="${enemyMonster.maxhp}" monster_level="${enemyMonster.level}" monster_type="${enemyMonster.type}"></monster-panel-info>
+
+                <monster-panel-info class="monster-panel moster-panel-self" monster_name="${userMonster.name}" monster_hp="${userMonster.hp}" monster_maxhp="${userMonster.maxhp}" monster_level="${userMonster.level}" monster_type="${userMonster.type}"></monster-panel-info>
+
+                <div class="wrap-monster enemy">
+                    <div class="model-monster">
+                        <monster-box-character monster_ava="${enemyMonster.image}" monster_type="enemy"></monster-box-character>
+                    </div>
+                    <div class="show-damage">-12312</div>
+                </div>
+
+                <div class="wrap-monster ally">
+                    <div class="model-monster">
+                        <monster-box-character monster_ava="${userMonster.image}" monster_type="ally"></monster-box-character>
+                    </div>
+                    <div class="show-damage">-123123</div>
+                </div>
                 <div class="skill-bar">
                 </div>
+                <audio id="audio-skill" src="" controls preload="metadata" autoplay>
+                    <p>Your browser doesn't support html5 audio.</p>
+                </audio>
             </div>
         `;
 
         const fightContainer = this._shadowRoot.querySelector('.map-fight-wrapper');
+        const showDameUser = this._shadowRoot.querySelector('.ally .show-damage');
+        const showDameEnemy = this._shadowRoot.querySelector('.enemy .show-damage');
+        const enemyMonster_el = this._shadowRoot.querySelector('.wrap-monster.enemy');
+        const userMonster_el = this._shadowRoot.querySelector('.wrap-monster.ally');
+        const enemyPanel = this._shadowRoot.querySelector('.moster-panel-enemy');
+        const userPanel = this._shadowRoot.querySelector('.moster-panel-self');
+        const audioSkill_el = this._shadowRoot.querySelector('#audio-skill');
+        //Game play start
+        const skillsBar = fightContainer.querySelector('.skill-bar');
 
-        if (monsterEnemyData) {
-            // Get monster skill
-            let monsterSkillActive = monsterEnemyData.skills.filter((skill) => {
-                return skill.checkLevelRequired(monsterEnemyData.level);
-            });
-
-            //Game play start
-
-            const skillsBar = fightContainer.querySelector('.skill-bar');
-
-            monsterAllyData.skills.forEach((skill, index) => {
-                if (skill.checkLevelRequired(monsterAllyData.level)) {
-                    skillsBar.insertAdjacentHTML(
-                        'beforeend',
-                        `
+        userMonster.getSkillActive().forEach((skill, index) => {
+            skillsBar.insertAdjacentHTML(
+                'beforeend',
+                `
                     <button class="skill-item" id="skill-${index}">
                         <img src="${config.img_dir}skills/${skill.image}.png" alt="skill">
                     </button>
                     `
+            );
+
+            const skillBtn = skillsBar.querySelector('#skill-' + index);
+
+            skillBtn.onclick = async () => {
+                audioSkill_el.src = `${config.audio_dir}skill/${skill.image}.mp3`;
+                skillsBar.classList.add('inactive');
+                // Damage enemy
+                let yourDamage = skill.damageInflicted(userMonster.atk, enemyMonster.def);
+                enemyMonster.hp -= yourDamage;
+                enemyPanel.setAttribute('monster_hp', enemyMonster.hp);
+                showDameEnemy.innerText = '-' + yourDamage;
+                showDameEnemy.classList.add('show');
+                enemyMonster_el.classList.add('inflictDamage');
+
+                setTimeout(() => {
+                    showDameEnemy.classList.remove('show');
+                    enemyMonster_el.classList.remove('inflictDamage');
+                }, 1000);
+
+                console.log(`Ban danh enemy con ${enemyMonster.hp}/${enemyMonster.maxhp}`);
+
+                // Check win
+                if (enemyMonster.hp <= 0) {
+                    enemyPanel.setAttribute('monster_hp', 0);
+                    enemyPanel.style.opacity = 0;
+                    enemyMonster_el.classList.add('die');
+
+                    // Getuser data
+                    let userData = await FS.collection('users').doc(getUid()).get();
+
+                    // Increase coin user
+                    await FS.collection('users')
+                        .doc(getUid())
+                        .update({
+                            coin: userData.data().coin + enemyMonster.gold_received,
+                        });
+
+                    //Check increase level
+                    let expResult = userMonster.exp + enemyMonster.experience_received;
+                    if (expResult >= userMonster.getExpNextLevel()) {
+                        userMonster.level += 1;
+                        userMonster.atk += userMonster.tier.statPerLevel;
+                        userMonster.hp = userMonster.maxhp + userMonster.tier.statPerLevel;
+                        userMonster.def += userMonster.tier.statPerLevel;
+                    }
+
+                    await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').doc(userMonsterId).update({
+                        exp: expResult,
+                        level: userMonster.level,
+                        atk: userMonster.atk,
+                        hp: userMonster.maxhp,
+                        def: userMonster.def,
+                    });
+                    ShowNoticeFight(
+                        'CHIẾN THẮNG',
+                        `<div class="fight-notice normal-win"><span>Vàng + ${enemyMonster.gold_received}</span><span>Exp + ${enemyMonster.experience_received}</span></div>`,
+                        '#!/map/' + this.props.map_id
                     );
-
-                    const skillBtn = skillsBar.querySelector('#skill-' + index);
-
-                    skillBtn.onclick = async () => {
-                        // Damage enemy
-                        let yourDamage = skill.damageInflicted(monsterAllyData.atk, monsterEnemyData.def);
-
-                        monsterEnemyData.hp -= yourDamage;
-
-                        console.log('Ban danh enemy con ' + monsterEnemyData.hp);
-
-                        // Check hp enemy
-
-                        if (monsterEnemyData.hp <= 0) {
-                            // Increase coin user
-                            await FS.collection('users')
-                                .doc(getUid())
-                                .update({
-                                    coin: userData.data().coin + monsterEnemyData.gold_received,
-                                });
-
-                            //Increase exp monster ally
-                            let expResult;
-                            expResult = monsterAllyData.exp + monsterEnemyData.experience_received;
-
-                            //Check increase level
-                            if (expResult >= monsterAllyData.getExpNextLevel()) {
-                                monsterAllyData.level += 1;
-                                monsterAllyData.atk += monsterAllyData.tier.statPerLevel;
-                                monsterAllyData.hp = monsterAllyData.baseHp + monsterAllyData.tier.statPerLevel;
-                                monsterAllyData.basehp = monsterAllyHpBase + monsterAllyData.tier.statPerLevel;
-                                monsterAllyData.def += monsterAllyData.tier.statPerLevel;
-                            } else {
-                                monsterAllyData.hp = monsterAllyHpBase;
-                            }
-
-                            await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').doc(monsterAllyId).update({
-                                exp: expResult,
-                                level: monsterAllyData.level,
-                                atk: monsterAllyData.atk,
-                                hp: monsterAllyData.hp,
-                                def: monsterAllyData.def,
-                            });
-
-                            ShowNoticeFight(
-                                'CHIẾN THẮNG',
-                                `<div class="fight-notice normal-win"><span>Vàng + ${monsterEnemyData.gold_received}</span><span>Exp + ${monsterEnemyData.experience_received}</span></div>`,
-                                '#!/map/' + this.props.map_id
-                            );
-                            monsterEnemyData.hp = monsterEnemyData.baseHp;
-                            return;
-                        }
-
-                        this.props.turn = false;
-
-                        // Pass turn to Enemy
-                        setTimeout(() => {
-                            let randomSkill = chance.integer({ min: 0, max: monsterSkillActive.length - 1 });
-
-                            let enemyDame = monsterSkillActive[randomSkill].damageInflicted(monsterEnemyData.atk, monsterAllyData.def);
-                            monsterAllyData.hp -= enemyDame;
-
-                            console.log('Enemy danh ban con ' + monsterAllyData.hp);
-
-                            // Check hp ally
-                            if (monsterAllyData.hp <= 0) {
-                                ShowNoticeFight('THẤT BẠI', 'Bạn đã thua !', '#!/map/' + this.props.map_id);
-                                monsterEnemyData.hp = monsterEnemyData.baseHp;
-                                return;
-                            }
-
-                            this.props.turn = true;
-
-                            console.log('Your turn', this.props.turn);
-                        }, 1000);
-                    };
+                    return;
                 }
-            });
-        }
+
+                this.props.turn = false;
+
+                // Pass turn to Enemy
+                setTimeout(() => {
+                    let randomSkillIndex = chance.integer({ min: 0, max: enemyMonster.getSkillActive().length - 1 });
+                    let randomSkill = enemyMonster.getSkillActive()[randomSkillIndex];
+                    let enemyDame = randomSkill.damageInflicted(enemyMonster.atk, userMonster.def);
+                    audioSkill_el.src = `${config.audio_dir}skill/${randomSkill.image}.mp3`;
+
+                    userMonster.hp -= enemyDame;
+                    userPanel.setAttribute('monster_hp', userMonster.hp);
+                    showDameUser.innerText = '-' + enemyDame;
+                    showDameUser.classList.add('show');
+                    userMonster_el.classList.add('inflictDamage');
+                    setTimeout(() => {
+                        showDameUser.classList.remove('show');
+                        userMonster_el.classList.remove('inflictDamage');
+                    }, 1000);
+                    console.log(`Enemy danh ban con ${userMonster.hp}/${userMonster.maxhp}`);
+
+                    // Check lose
+                    if (userMonster.hp <= 0) {
+                        userPanel.setAttribute('monster_hp', 0);
+                        userMonster_el.classList.add('die');
+                        userPanel.style.opacity = 0;
+                        ShowNoticeFight('THẤT BẠI', 'Bạn đã thua !', '#!/map/' + this.props.map_id);
+                        return;
+                    }
+
+                    setTimeout(() => {
+                        this.props.turn = true;
+                        skillsBar.classList.remove('inactive');
+                        console.log('Your turn', this.props.turn);
+                    }, 1000);
+                }, 1000);
+            };
+        });
     }
 }
 

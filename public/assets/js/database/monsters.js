@@ -1,13 +1,16 @@
 import Tier from './Tier.js';
+import SkillsMonster from '../skillsConfig.js';
+import Skill from '../database/Skills.js';
 
 class Monster {
-    constructor(name, description, avatar, exp, level, type, atk, hp, def, skills, tier) {
+    constructor(name, description, image, exp, level, type, atk, hp, def, skills, tier) {
         this._name = name;
         this._description = description;
-        this._avatar = avatar;
+        this._image = image;
+        this._exp = exp;
         this._atk = atk;
         this._hp = hp;
-        this._baseHp = hp;
+        this._maxhp = hp;
         this._def = def;
         this._exp = exp;
         this._level = level;
@@ -24,8 +27,12 @@ class Monster {
         return this._description;
     }
 
-    get avatar() {
-        return this._avatar;
+    get image() {
+        return this._image;
+    }
+
+    get exp() {
+        return this._exp;
     }
 
     get level() {
@@ -40,8 +47,8 @@ class Monster {
         return this._hp;
     }
 
-    get baseHp() {
-        return this._baseHp;
+    get maxhp() {
+        return this._maxhp;
     }
 
     get def() {
@@ -68,8 +75,12 @@ class Monster {
         this._description = value;
     }
 
-    set avatar(value) {
-        this._avatar = value;
+    set image(value) {
+        this._image = value;
+    }
+
+    set exp(value) {
+        this._exp = value;
     }
 
     set level(value) {
@@ -82,10 +93,6 @@ class Monster {
 
     set hp(value) {
         this._hp = value;
-    }
-
-    set baseHp(value) {
-        this._baseHp = value;
     }
 
     set def(value) {
@@ -118,6 +125,22 @@ class Monster {
 
     getMaxStatValue(stat) {
         return this.getMaxLevel() * Tier[this._tier].statPerLevel + stat;
+    }
+
+    getSkillActive() {
+        let skillEnemyTemplate = this._skills.map((skill) => {
+            return SkillsMonster[skill];
+        });
+
+        let skillEnemyData = skillEnemyTemplate.map((skill) => {
+            return new Skill(skill.name, skill.description, skill.image, skill.skill_damage, skill.skill_effect, skill.level_required);
+        });
+
+        let skillEnemyActive = skillEnemyData.filter((skill) => {
+            return skill.checkLevelRequired(this._level);
+        });
+
+        return skillEnemyActive;
     }
 }
 

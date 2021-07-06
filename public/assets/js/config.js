@@ -5,6 +5,7 @@ const config = {
     img_dir: domain + '/assets/img/',
     style_dir: domain + '/assets/css/',
     js_dir: domain + '/assets/js/',
+    audio_dir: domain + '/assets/audio/',
     upload_dir: domain + '/assets/uploads/',
 };
 

@@ -1,8 +1,10 @@
+import { BaseComponent } from '../../components/BaseComponent.js';
+
 import { config, FS } from '../../config.js';
 import { getUid, ShowNotice } from '../../ultils/ultils.js';
 import ItemsMonsters from '../../itemConfig.js';
-import { BaseComponent } from '../../components/BaseComponent.js';
-import { monstersNormal } from '../../monsterConfig.js';
+
+import MonsterNormal from '../../monsterNormalConfig.js';
 
 class ShopScreen extends BaseComponent {
     constructor() {
@@ -54,9 +56,11 @@ class ShopScreen extends BaseComponent {
             );
 
             const btnBuy = itemList_el.querySelector('#item-' + index);
+
             btnBuy.onclick = async () => {
                 let userData = await FS.collection('users').doc(getUid()).get();
                 let userCoin = userData.data().coin;
+
                 if (item.canBuy(userCoin)) {
                     await FS.collection('users')
                         .doc(getUid())
@@ -68,12 +72,14 @@ class ShopScreen extends BaseComponent {
 
                     if (rewardResponse.status) {
                         let checkMonsterInBook = await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').where('monster_index', '==', rewardResponse.monsterIndex).get();
+
                         console.log(rewardResponse.monsterIndex);
+
                         if (checkMonsterInBook.docs[0]) {
                             ShowNotice(
                                 'Cảm ơn!',
                                 'Bạn đã có quái vật <b>' +
-                                    monstersNormal[rewardResponse.monsterIndex].name +
+                                    MonsterNormal[rewardResponse.monsterIndex].name +
                                     '</b> trong <b>Sách quái vật</b> cửa hàng xin tặng bạn <b>' +
                                     numeral(item.price + item.price * 0.04).format('0,0') +
                                     '</b> coin để an ủi nha.'
@@ -85,19 +91,23 @@ class ShopScreen extends BaseComponent {
                                     coin: userCoin + item.price + item.price * 0.04,
                                 });
                         } else {
-                            let monsterData = monstersNormal[rewardResponse.monsterIndex];
+                            let monsterData = MonsterNormal[rewardResponse.monsterIndex];
+
                             ShowNotice(
                                 'Chúc mừng!',
-                                `<div class="item-reward-img"><img src="${config.img_dir}monsters/${monsterData.avatar}.png"></div><div class="item-reward-notice">Bạn đã nhận được quái vật <strong>${monsterData.name}</strong></div>`
+                                `<div class="item-reward-img"><img src="${config.img_dir}monsters/${monsterData.image}.png"></div><div class="item-reward-notice">Bạn đã nhận được quái vật <strong>${monsterData.name}</strong></div>`
                             );
                             await FS.collection('monster-templates').doc(getUid()).collection('list-monsters').add({
+                                name: monsterData.name,
                                 atk: monsterData.atk,
                                 def: monsterData.def,
                                 hp: monsterData.hp,
-                                baseHp: monsterData.baseHp,
                                 exp: 0,
-                                is_battle: false,
                                 level: 0,
+                                skills: monsterData.skills,
+                                type: monsterData.type,
+                                tier: monsterData.tier,
+                                is_battle: false,
                                 monster_index: rewardResponse.monsterIndex,
                             });
                         }

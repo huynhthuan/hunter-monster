@@ -1,8 +1,8 @@
+import { BaseComponent } from '../../components/BaseComponent.js';
+
 import { config, AU, FS } from '../../config.js';
 import { verifyPassword, sha1, ShowNotice } from '../../ultils/ultils.js';
-
-import { BaseComponent } from '../../components/BaseComponent.js';
-import { monstersNormal } from '../../monsterConfig.js';
+import MonsterNormal from '../../monsterNormalConfig.js';
 
 class SignUp extends BaseComponent {
     constructor() {
@@ -89,18 +89,20 @@ class SignUp extends BaseComponent {
                         });
 
                         // Random monster for new user
-
                         let mosterIndex = chance.integer({ min: 0, max: 2 });
-                        let monsterData = monstersNormal[mosterIndex];
+                        let monsterData = MonsterNormal[mosterIndex];
 
                         FS.collection('monster-templates').doc(userCredential.user.uid).collection('list-monsters').add({
+                            name: monsterData.name,
                             atk: monsterData.atk,
                             def: monsterData.def,
                             hp: monsterData.hp,
-                            baseHp: monsterData.baseHp,
                             exp: 0,
-                            is_battle: false,
                             level: 0,
+                            skills: monsterData.skills,
+                            type: monsterData.type,
+                            tier: monsterData.tier,
+                            is_battle: false,
                             monster_index: mosterIndex,
                         });
 

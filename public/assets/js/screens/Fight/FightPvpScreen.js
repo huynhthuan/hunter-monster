@@ -1,7 +1,7 @@
 import { config } from '../../config.js';
 import { ShowNoticeFight } from '../../ultils/ultils.js';
 import maps from '../../mapConfig.js';
-import { monstersMap } from '../../monsterConfig.js';
+// import { monstersMap } from '../../monsterConfig.js';
 
 import { BaseComponent } from '../../components/BaseComponent.js';
 
