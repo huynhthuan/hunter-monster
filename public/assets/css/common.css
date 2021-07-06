@@ -125,3 +125,8 @@ button:focus-visible {
     justify-content: space-around;
     align-items: center;
 }
+
+#audiobackground {
+    opacity: 0;
+    visibility: hidden;
+}
